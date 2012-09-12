@@ -24,11 +24,13 @@ public class ThreadLocalTest {
         AtomicInteger counter = new AtomicInteger(0);
         ThreadLocal<Integer> tlNumber = new ThreadLocal<>(() -> counter.incrementAndGet());
         Assert.assertEquals(tlNumber.get(), (Integer)1);
+        Assert.assertEquals(tlNumber.get(), (Integer)1);
     }
 
     @Test
     public void threadLocalMRef() {
         ThreadLocal<Integer> tlNumber = new ThreadLocal<>(new AtomicInteger(0)::incrementAndGet);
+        Assert.assertEquals(tlNumber.get(), (Integer)1);
         Assert.assertEquals(tlNumber.get(), (Integer)1);
     }
 
