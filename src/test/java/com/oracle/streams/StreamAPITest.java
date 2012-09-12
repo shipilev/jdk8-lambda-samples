@@ -8,32 +8,34 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.functions.Block;
+import java.util.streams.Stream;
 import java.util.streams.StreamBuilder;
 
 public class StreamAPITest {
 
     @Test
-    public void test() {
+    public void test1() {
+        List<String> strings = Arrays.asList("Foo", "Bar", "Baz");
+        Stream<String> stream = strings.stream();
         Assert.assertEquals(
                 "Foo",
-                Arrays.asList("Foo", "Bar", "Baz").stream().findFirst().get()
-        );
-    }
-
-    @Test
-    public void test1() {
-        Assert.assertEquals(
-                Arrays.asList("Bar", "Baz"),
-                Arrays.asList("Foo", "Bar", "Baz")
-                        .stream()
-                        .filter((s) -> s.startsWith("B"))
-                        .into(new ArrayList<String>()
-                        )
+                stream.findFirst().get()
         );
     }
 
     @Test
     public void test2() {
+        Assert.assertEquals(
+                Arrays.asList("Bar", "Baz"),
+                Arrays.asList("Foo", "Bar", "Baz")
+                        .stream()
+                        .filter((s) -> s.startsWith("B"))
+                        .into(new ArrayList<String>())
+        );
+    }
+
+    @Test
+    public void test3() {
         Assert.assertEquals(
                 Arrays.asList(3, 3, 3),
                 Arrays.asList("Foo", "Bar", "Baz")
@@ -44,7 +46,7 @@ public class StreamAPITest {
     }
 
     @Test
-    public void test3() {
+    public void test4() {
         Assert.assertEquals(
                 Integer.valueOf(9),
                 Arrays.asList("Foo", "BarBar", "BazBazBaz")

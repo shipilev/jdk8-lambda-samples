@@ -4,6 +4,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class ExternalInternalTest {
 
@@ -11,7 +12,8 @@ public class ExternalInternalTest {
     public void testExternal() {
         StringBuilder sb = new StringBuilder();
 
-        for (String s : Arrays.asList("Foo", "Bar", "Baz")) {
+        List<String> strings = Arrays.asList("Foo", "Bar", "Baz");
+        for (String s : strings) {
             sb.append(s);
         }
 
@@ -25,8 +27,8 @@ public class ExternalInternalTest {
     public void testInternal() {
         StringBuilder sb = new StringBuilder();
 
-        Arrays.asList("Foo", "Bar", "Baz")
-                .forEach((s) -> { sb.append(s); });
+        List<String> strings = Arrays.asList("Foo", "Bar", "Baz");
+        strings.forEach((s) -> { sb.append(s); });
 
         Assert.assertEquals(
                 "FooBarBaz",
