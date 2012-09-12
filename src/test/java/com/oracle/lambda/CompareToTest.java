@@ -31,6 +31,18 @@ public class CompareToTest {
         Assert.assertEquals(1, cmp.compare(100, -100));
     }
 
+    public void testLambdaEF() {
+        int minus_one = -1;
+        int zero = 0;
+        int one  = 1;
+
+        Comparator<Integer> cmp = (x, y) -> (x < y) ? minus_one : ((x > y) ? one : zero);
+
+        Assert.assertEquals(0,  cmp.compare(0, 0));
+        Assert.assertEquals(-1, cmp.compare(-100, 100));
+        Assert.assertEquals(1,  cmp.compare(100, -100));
+    }
+
     @Test
     public void testMethodRef1() {
         Comparator<Integer> cmp = Integer::compare;
