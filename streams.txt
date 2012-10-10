@@ -3,7 +3,7 @@ Streams
 
 * SHOW: ExternalInternalTest:
   - highlight the difference between internal and external iteration
-  - external is explicitly serail
+  - external iteration is explicitly serial
   - libraries have more headroom optimizing with internal iteration
   - sometimes even forEach is not enough: chaining the action within the serial again
 
@@ -17,7 +17,7 @@ Streams
 
  - test1():
     Arrays.asList() is actually List<String>
-    .stream() actually produces Steram<String>, but it's hidden
+    .stream() actually produces Stream<String>, but it's hidden
     .findFirst() polls the first element from the stream
     .get() gets the element
 
