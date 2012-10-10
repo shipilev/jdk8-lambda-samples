@@ -5,11 +5,9 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.functions.Block;
 import java.util.streams.Stream;
-import java.util.streams.StreamBuilder;
 
 public class StreamAPITest {
 
@@ -70,11 +68,11 @@ public class StreamAPITest {
     @Test
     public void test6() {
         Assert.assertEquals(
-                new HashSet<String>() {{ add("Foo"); add("Bar"); add("Baz"); }},
+                new ArrayList() {{ add("Foo"); add("Bar"); add("Baz"); }},
                 Arrays.asList("Foo", "Bar", "Baz", "Baz", "Foo", "Bar")
                         .stream()
                         .uniqueElements()
-                        .into(new HashSet<String>())
+                        .into(new ArrayList<String>())
         );
     }
 
@@ -99,8 +97,5 @@ public class StreamAPITest {
                         .into(new ArrayList<String>())
         );
     }
-
-
-
 
 }

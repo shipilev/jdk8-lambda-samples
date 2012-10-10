@@ -8,6 +8,14 @@ import java.util.functions.Mapper;
 public class WeirdFunctionTest {
 
     @Test
+    public void test0() {
+        Mapper<Integer,Integer> f = ((Integer)0)::compareTo;
+        Mapper<Integer,Integer> f1 = f.compose(f);
+
+        // f1 does what?!
+    }
+
+    @Test
     public void test1() {
         Mapper<Integer,Integer> f = ((Integer)0)::compareTo;
         f = f.compose(f);

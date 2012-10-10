@@ -31,6 +31,7 @@ public class CompareToTest {
         Assert.assertEquals(1, cmp.compare(100, -100));
     }
 
+    @Test
     public void testLambdaEF() {
         int minus_one = -1;
         int zero = 0;
@@ -44,7 +45,7 @@ public class CompareToTest {
     }
 
     @Test
-    public void testMethodRef1() {
+    public void testMethodRefUnboundStatic() {
         Comparator<Integer> cmp = Integer::compare;
 
         Assert.assertEquals(0, cmp.compare(0, 0));
@@ -53,7 +54,7 @@ public class CompareToTest {
     }
 
     @Test
-    public void testMethodRef2() {
+    public void testMethodRefUnboundVirtual() {
         Comparator<Integer> cmp = Integer::compareTo;
 
         Assert.assertEquals(0, cmp.compare(0, 0));
@@ -61,5 +62,14 @@ public class CompareToTest {
         Assert.assertEquals(1, cmp.compare(100, -100));
     }
 
+    @Test
+    public void testMethodRefBoundVirtual() {
+        Comparator<Integer> cmp0 = Integer::compareTo;
+        Comparator<Integer> cmp = cmp0::compare;
+
+        Assert.assertEquals(0, cmp.compare(0, 0));
+        Assert.assertEquals(-1, cmp.compare(-100, 100));
+        Assert.assertEquals(1, cmp.compare(100, -100));
+    }
 
 }

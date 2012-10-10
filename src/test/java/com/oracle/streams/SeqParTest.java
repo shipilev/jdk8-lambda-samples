@@ -22,7 +22,6 @@ public class SeqParTest {
         }
     }
 
-
     @Test
     public void testSeq() {
         Optional<Integer> result = list.stream().reduce((l, r) -> l + r);
