@@ -1,0 +1,67 @@
+Streams
+------------------------------------------------------
+
+* SHOW: ExternalInternalTest:
+  - highlight the difference between internal and external iteration
+  - external is explicitly serail
+  - libraries have more headroom optimizing with internal iteration
+  - sometimes even forEach is not enough: chaining the action within the serial again
+
+* Stream:
+ - explain why Stream is needed, why not Iterable
+ - able to chain/fuse multiple operations
+ - can change shape as we go
+ - many loops are expressed as source -> ops -> ... -> ops -> sink chain
+
+* SHOW: StreamAPI test:
+
+ - test1():
+    Arrays.asList() is actually List<String>
+    .stream() actually produces Steram<String>, but it's hidden
+    .findFirst() polls the first element from the stream
+    .get() gets the element
+
+    [DISCUSSION FOR OPTIONAL]
+
+ - test2():
+    .filter() accepts the elements matching the predicate
+    .into() dumps the result into the collection
+
+ - test3():
+    .map() generates Stream<R> from Stream<T>
+
+ - test4():
+    .reduce() is the alias for foldl.
+    Q: What this code is doing?
+
+ - test5():
+    .flatMap() produces multiple results for each element
+    breaks the string into the words
+
+ - test6():
+    .uniqueElements() filters out duplicates
+
+ - test7():
+    .sorted() sorts the elements in the stream [EAGER OPERATION]
+
+ - test8():
+    .cumulate() computes the prefix
+
+* Lazy vs. Eager semantics:
+  - once the call returns, the result is not ready yet for lazy op, and ready for eager op
+
+  SHOW: LazyEagerTest
+    - testLazy(): streams are naturally lazy, operated in "pull" fashion
+    - testShortCircuit(): laziness enables easy shortcircuiting with predictable state
+    - testEager(): if we know to terminate the pipeline with eager op, we can do "push"
+
+  "push" has awesome performance advantages, not requiring to handle the intermediate states in pipeline stages
+
+* Sequential vs. Parallel
+  - internal iterations enables us to ask for parallelism
+
+  SHOW: SeqParTest
+    - the only the difference is asking parallel(), not stream()
+    - we explicitly ask use for enabling parallelism, because of the overheads
+
+  The backing generator is responsible for subdividing itself recursively; uses Fork/Join to compute in parallel.
