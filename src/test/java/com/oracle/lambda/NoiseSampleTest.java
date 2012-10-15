@@ -36,7 +36,7 @@ public class NoiseSampleTest {
     @Test
     public void testL() {
         Map<String, SortedMap<String, Counter>> map =
-                new ComputeTreeMap<>((s) -> new ComputeTreeMap<>((_) -> new Counter()));
+                new ComputeTreeMap<String, SortedMap<String, Counter>>((s) -> new ComputeTreeMap<String, Counter>((x) -> new Counter()));
 
         Assert.assertEquals(1, map.get("foo").get("bar").inc());
         Assert.assertEquals(2, map.get("foo").get("bar").inc());
@@ -48,7 +48,7 @@ public class NoiseSampleTest {
      * @param <K>
      * @param <V>
      */
-    public class ComputeTreeMap<K, V> extends TreeMap<K,V> {
+    public static class ComputeTreeMap<K, V> extends TreeMap<K,V> {
 
         private final Mapper<K, V> map;
 
@@ -68,7 +68,7 @@ public class NoiseSampleTest {
         }
     }
 
-    public class Counter {
+    public static class Counter {
         private int count = 0;
         public int inc() {
             return ++count;
