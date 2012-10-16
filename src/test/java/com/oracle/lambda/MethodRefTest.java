@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.util.Comparator;
 
-public class CompareToTest {
+public class MethodRefTest {
 
     @Test
     public void testLegacy() {
@@ -26,10 +26,12 @@ public class CompareToTest {
     public void testLambda() {
         Comparator<Integer> cmp = (x, y) -> (x < y) ? -1 : ((x > y) ? 1 : 0);
 
-        Assert.assertEquals(0, cmp.compare(0, 0));
+        Assert.assertEquals(0,  cmp.compare(0, 0));
         Assert.assertEquals(-1, cmp.compare(-100, 100));
-        Assert.assertEquals(1, cmp.compare(100, -100));
+        Assert.assertEquals(1,  cmp.compare(100, -100));
     }
+
+//------------------------------------------------------------------------------
 
     @Test
     public void testLambdaEF() {
