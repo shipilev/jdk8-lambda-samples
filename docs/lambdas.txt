@@ -1,0 +1,67 @@
+* what is a lambda?
+    - is lambda closure?
+    - anonymous function
+
+* what is a type of lambda expression?
+    - need some function type
+    - MethodHandle?
+    - Declare "functional interface" - SAM - aka single-method interface.
+
+* Lambda expression is an instance of functional interface.
+
+  SHOW: LambdaTest, testCmpLegacy/testCmpLambda0
+
+* Lambda syntax
+  SHOW: LambdaTest
+    (int x)->     SHOW: LambdaTest::testCmpLambda1
+    ()->()        SHOW: LambdaTest::testNoArgs
+    (x)-> aka x->  SHOW: LambdaTest::testOneArg*
+    (x,y) -> <expr>
+    (x,y) -> { ....., return <expr>; }  SHOW: LambdaTest::testCmpLambda2 & 3
+    (x,y) -> { ....., ; }  aka void   SHOW: LambdaTest::testBlock*
+
+  SHOW: UroborosTest
+
+* A lambda/method reference can be used in the following contexts (Where can I use a lambda/method reference?):
+        assignment - i.e. FI f = ()-> 42;
+        return expression - i.e. return ()->42;
+        method/constructor argument - i.e. m(1, "", ()->42);
+        array initializer - i.e. FI[] o = { ()->41, ()->42 };
+        cast - i.e. (FI)()->42;
+        parenthesized expression occurring in any of the above contexts - i.e. FI f = (()-> 42);
+
+
+*   lambda       vs     anon/innerClass
+ - linkage              - class loading
+ - capture              - creation (new)
+ - invocation           - invocation
+
+* capture
+  SHOW: CaptureTest
+    - effective final
+
+* recursive lambda aka capture itself
+  SHOW: FibonacciTest
+
+* Method Ref
+  - syntax A::b
+  SHOW: MethodRefTest
+  - methodRef to static method
+  - methodRef to instance method
+        - bound
+        - unbound
+  - MethodRef to Constructor
+        SHOW: parseInt/constructor
+
+* life became better (and more fun) (c) Stalin
+  SHOW: ThreadLocalTest
+  SHOW: NoiseSampleTest
+  SHOW: WeirdFunctionTest
+
+* implementation details.
+  - static inner
+  - dynamic inner
+  - dynamic methodHandleProxy
+
+* serialization
+-------------------------------------------------------------------
