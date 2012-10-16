@@ -5,6 +5,11 @@ import org.junit.Test;
 
 public class UroborosTest {
 
+    interface Uroboros {
+        Uroboros bite();
+    }
+
+
     @Test
     public void test() {
         Uroboros chain = () -> () -> () -> () -> () -> () -> () -> () -> () -> () -> null;
@@ -16,10 +21,6 @@ public class UroborosTest {
         }
 
         Assert.assertEquals(10, depth);
-    }
-
-    interface Uroboros {
-        Uroboros bite();
     }
 
 }

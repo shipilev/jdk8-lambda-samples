@@ -31,8 +31,8 @@ public class ThreadLocalTest {
 
     @Test
     public void threadLocalMRef() {
-        AtomicInteger ai = new AtomicInteger(0);
-        Factory<Integer> factory = ai::incrementAndGet;
+        AtomicInteger counter = new AtomicInteger(0);
+        Factory<Integer> factory = counter::incrementAndGet;
         ThreadLocal<Integer> tlNumber = new ThreadLocal<>(factory);
         Assert.assertEquals(tlNumber.get(), (Integer)1);
         Assert.assertEquals(tlNumber.get(), (Integer)1);
