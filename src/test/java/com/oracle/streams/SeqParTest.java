@@ -5,12 +5,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 public class SeqParTest {
 
-    private static final int COUNT = Integer.getInteger("count", 10000);
+    private static final int COUNT = Integer.getInteger("count", 1_000_000);
 
     private List<Integer> list;
 
@@ -20,18 +21,19 @@ public class SeqParTest {
         for (int c = 1; c <= COUNT; c++) {
             list.add(c);
         }
+        Collections.shuffle(list);
     }
 
     @Test
     public void testSeq() {
-        Optional<Integer> result = list.stream().reduce((l, r) -> l + r);
-        Assert.assertEquals(Integer.valueOf(50005000), result.get());
+        Optional<Integer> result = list.stream().reduce(Math::max);
+        Assert.assertEquals(Integer.valueOf(COUNT), result.get());
     }
 
     @Test
     public void testPar() {
-        Optional<Integer> result = list.parallel().reduce((l, r) -> l + r);
-        Assert.assertEquals(Integer.valueOf(50005000), result.get());
+        Optional<Integer> result = list.parallel().reduce(Math::max);
+        Assert.assertEquals(Integer.valueOf(COUNT), result.get());
     }
 
 }
