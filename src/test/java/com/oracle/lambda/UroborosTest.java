@@ -9,7 +9,6 @@ public class UroborosTest {
         Uroboros bite();
     }
 
-
     @Test
     public void test() {
         Uroboros chain = () -> () -> () -> () -> () -> () -> () -> () -> () -> () -> null;

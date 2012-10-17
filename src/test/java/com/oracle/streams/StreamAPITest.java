@@ -65,6 +65,7 @@ public class StreamAPITest {
                         .into(new ArrayList<String>()));
     }
 
+    @SuppressWarnings("serial")
     @Test
     public void test6() {
         Assert.assertEquals(

@@ -97,6 +97,7 @@ public class NoiseSampleTest {
      * @param <K>
      * @param <V>
      */
+    @SuppressWarnings("serial")
     public static class ComputeMap<K, V> extends HashMap<K, V> {
 
         private final Factory<V> factory;
@@ -107,6 +108,7 @@ public class NoiseSampleTest {
 
         @Override
         public V get(Object key) {
+            @SuppressWarnings("unchecked")
             K k = (K) key;
             V v = super.get(key);
             if (v == null) {
