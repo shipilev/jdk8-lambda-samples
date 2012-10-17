@@ -3,39 +3,62 @@ package com.oracle.lambda;
 import junit.framework.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.functions.Block;
 import java.util.functions.Factory;
 import java.util.functions.Mapper;
+import java.util.functions.Predicate;
 
 public class MethodRefTest {
 
     @Test
-    public void testMethodRefUnboundStatic() {
+    public void testMethodRefStatic() {
         Comparator<Integer> cmp = Integer::compare;
 
-        Assert.assertEquals(0, cmp.compare(0, 0));
+        Assert.assertEquals(0,  cmp.compare(0, 0));
         Assert.assertEquals(-1, cmp.compare(-100, 100));
-        Assert.assertEquals(1, cmp.compare(100, -100));
+        Assert.assertEquals(1,  cmp.compare(100, -100));
     }
 
     @Test
-    public void testMethodRefUnboundVirtual() {
+    public void testMethodRefInstance0() {
+    //  Block<String> b = s -> System.out.println(s);
+        Block<String> b = System.out::println;
+        Arrays.asList("Foo", "Bar", "Baz", "Baz", "Foo", "Bar").forEach(b);
+    }
+
+    private Predicate<String> makeCaseUnsensitiveMatcher(String pattern) {
+        return pattern::equalsIgnoreCase;
+    }
+
+    @Test
+    public void testMethodRefInstance1() {
+        // Predicate<T>   ~  boolean test(T t);
+        Assert.assertTrue( makeCaseUnsensitiveMatcher("true").test("TruE") );
+        Assert.assertTrue( makeCaseUnsensitiveMatcher("false").test("FalsE") );
+        Assert.assertFalse(makeCaseUnsensitiveMatcher("true").test("FalsE") );
+    }
+
+    @Test
+    public void testMethodRefInstance2() {
+        // Predicate<T>   ~  boolean test(T t);
+        Predicate<String> isTrue = "true"::equalsIgnoreCase;
+        Assert.assertTrue(isTrue.test("TruE"));
+        Assert.assertFalse(isTrue.test("FalsE"));
+    }
+
+    @Test
+    public void testMethodRefInstanceUnbound() {
+        // Comparator<T>  ~ int compare(T o1, T o2);
+        // Integer        ~ int compareTo(Integer anotherInteger)
         Comparator<Integer> cmp = Integer::compareTo;
 
-        Assert.assertEquals(0, cmp.compare(0, 0));
+        Assert.assertEquals(0,  cmp.compare(0, 0));
         Assert.assertEquals(-1, cmp.compare(-100, 100));
-        Assert.assertEquals(1, cmp.compare(100, -100));
+        Assert.assertEquals(1,  cmp.compare(100, -100));
     }
 
-    @Test
-    public void testMethodRefBoundVirtual() {
-        Comparator<Integer> cmp0 = Integer::compareTo;
-        Comparator<Integer> cmp = cmp0::compare;
-
-        Assert.assertEquals(0, cmp.compare(0, 0));
-        Assert.assertEquals(-1, cmp.compare(-100, 100));
-        Assert.assertEquals(1, cmp.compare(100, -100));
-    }
 
     @Test
     public void testParseInt(){

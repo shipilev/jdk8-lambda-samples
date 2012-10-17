@@ -45,13 +45,12 @@
 
 * Method Ref
   - syntax A::b
-  SHOW: MethodRefTest
-  - methodRef to static method
+  - methodRef to static method    SHOW: MethodRefTest.testMethodRefStatic
   - methodRef to instance method
-        - bound
-        - unbound
+        - bound                   SHOW: MethodRefTest.testMethodRefInstance0/1/2
+        - unbound                 SHOW: MethodRefTest.testMethodRefInstanceUnbound
   - MethodRef to Constructor
-        SHOW: parseInt/constructor
+        SHOW: parseInt/constructor/0/1
 
 * life became better (and more fun) (c) Stalin
   SHOW: ThreadLocalTest
