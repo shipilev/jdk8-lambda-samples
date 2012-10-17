@@ -38,13 +38,13 @@ Streams
     .flatMap() produces multiple results for each element
     breaks the string into the words
 
- - test6():
+ - (optional) test6():
     .uniqueElements() filters out duplicates
 
- - test7():
+ - (optional) test7():
     .sorted() sorts the elements in the stream [EAGER OPERATION]
 
- - test8():
+ - (optional) test8():
     .cumulate() computes the prefix
 
 * Lazy vs. Eager semantics:
@@ -57,6 +57,11 @@ Streams
 
   "push" has awesome performance advantages, not requiring to handle the intermediate states in pipeline stages
 
+  SHOW: LazyEagerBench
+    (run with -Xmx4g -Xms4g, -r 3 -i 3 -f)
+    - each stage maintains the state, because every state can be potentially cut over (see PeekTest)
+    - forEach knows we are traversing the whole source at once, need not to keep the state
+
 * Sequential vs. Parallel
   - internal iterations enables us to ask for parallelism
 
@@ -65,3 +70,6 @@ Streams
     - we explicitly ask use for enabling parallelism, because of the overheads
 
   The backing generator is responsible for subdividing itself recursively; uses Fork/Join to compute in parallel.
+
+  SHOW: SeqParBench
+    (run with -Xmx4g -Xms4g, -r 3 -i 3 -f)
