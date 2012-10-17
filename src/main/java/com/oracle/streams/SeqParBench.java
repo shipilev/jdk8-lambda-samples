@@ -25,12 +25,12 @@ public class SeqParBench {
         Collections.shuffle(list);
     }
 
-    @GenerateMicroBenchmark
+//    @GenerateMicroBenchmark
     public Integer bench_1_Seq() {
         return list.stream().reduce(Math::max).get();
     }
 
-    @GenerateMicroBenchmark
+//    @GenerateMicroBenchmark
     public Integer bench_2_Par() {
         return list.parallel().reduce(Math::max).get();
     }
