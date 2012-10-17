@@ -33,7 +33,6 @@ public class LazyEagerTest {
 
     @Test
     public void testShortCircuit() {
-
         Stream<String> stream = Arrays.asList("Foo", "Marco", "Bar", "Polo", "Baz")
                 .stream()
                 .filter((s) -> { invocations++; return s.length() == 3; });
