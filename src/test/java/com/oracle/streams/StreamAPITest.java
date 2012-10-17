@@ -68,7 +68,7 @@ public class StreamAPITest {
     @Test
     public void test6() {
         Assert.assertEquals(
-                new ArrayList() {{ add("Foo"); add("Bar"); add("Baz"); }},
+                new ArrayList<String>() {{ add("Foo"); add("Bar"); add("Baz"); }},
                 Arrays.asList("Foo", "Bar", "Baz", "Baz", "Foo", "Bar")
                         .stream()
                         .uniqueElements()
