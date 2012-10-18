@@ -8,18 +8,18 @@ public class DefenderTest {
     @Test
     public void testNew() {
         Assert.assertEquals("Legacy Method from the New Class", new NewClass().legacyMethod());
-//        Assert.assertEquals("New Method from the New Class", new NewClass().newMethod());
+        Assert.assertEquals("New Method from the New Class", new NewClass().newMethod());
     }
 
     @Test
     public void testLegacy() {
         Assert.assertEquals("Legacy Method from the Legacy Class", new LegacyClass().legacyMethod());
-//        Assert.assertEquals("The beauty is in the eye of the defender", new LegacyClass().newMethod());
+        Assert.assertEquals("The beauty is in the eye of the defender", new LegacyClass().newMethod());
     }
 
     public interface LegacyInterface {
         String legacyMethod();
-//        String newMethod();
+        String newMethod() default { return "The beauty is in the eye of the defender"; };
     }
 
     public class LegacyClass implements LegacyInterface {
@@ -35,13 +35,10 @@ public class DefenderTest {
             return "Legacy Method from the New Class";
         }
 
-//        @Override
-//        public String newMethod() {
-//            return "New Method from the New Class";
-//        }
+        @Override
+        public String newMethod() {
+            return "New Method from the New Class";
+        }
     }
-
-//    default { return "The beauty is in the eye of the defender"; }
-
 
 }
