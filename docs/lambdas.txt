@@ -52,7 +52,7 @@
   - MethodRef to Constructor
         SHOW: parseInt/constructor/0/1
 
-* life became better (and more fun) (c) Stalin
+* life became better (and fun)
   SHOW: ThreadLocalTest
   SHOW: NoiseSampleTest
   SHOW: WeirdFunctionTest
