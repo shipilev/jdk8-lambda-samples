@@ -6,9 +6,12 @@ JDK8 Lambda Samples
 **** These tests may fail to compile, fail to run, or fail the      ****
 **** assertions due to syntactic and semantic changes in JDK.       ****
 
+One more time time:
+ THESE TESTS REFLECT THE CURRENT STATE OF LAMBDA, AND NOT THE FINAL JDK8
+
 These tests were used on local JUGs to highlight different things about
 upcoming Project Lambda (support for lambda expressions in Java 8). The
-tests are by no means extensive or complete, and really are the collaterals.
+tests are by no means extensive or complete, and really are the collateral.
 
 The general discussion about the implementation of Project Lambda:
   http://mail.openjdk.java.net/mailman/listinfo/lambda-dev
