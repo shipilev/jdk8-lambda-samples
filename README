@@ -1,6 +1,11 @@
 JDK8 Lambda Samples
 --------------------------------------------------------------------------
 
+**** DISCLAIMER:                                                    ****
+**** At the present moment, Project Lambda is in heavy development. ****
+**** These tests may fail to compile, fail to run, or fail the      ****
+**** assertions due to syntactic and semantic changes in JDK.       ****
+
 These tests were used on local JUGs to highlight different things about
 upcoming Project Lambda (support for lambda expressions in Java 8). The
 tests are by no means extensive or complete, and really are the collaterals.
@@ -13,3 +18,4 @@ Binary builds for JDK8 with Lambda support:
 
 General information about the project:
   http://openjdk.java.net/projects/lambda/
+
