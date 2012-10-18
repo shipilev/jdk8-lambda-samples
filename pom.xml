@@ -24,28 +24,6 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>1.5</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <finalName>microbenchmarks</finalName>
-                            <transformers>
-                                <transformer
-                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>oracle.micro.Main</mainClass>
-                                </transformer>
-                            </transformers>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 
@@ -56,17 +34,5 @@
             <version>4.8.1</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>oracle.micro</groupId>
-            <artifactId>MicroBenchmarkAPI</artifactId>
-            <version>1.5-SNAPSHOT</version>
-        </dependency>
     </dependencies>
-
-    <repositories>
-        <repository>
-            <id>Stockholm Repository</id>
-            <url>http://maven.se.oracle.com/nexus/content/groups/public</url>
-        </repository>
-    </repositories>
 </project>
