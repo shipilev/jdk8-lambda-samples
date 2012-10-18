@@ -13,6 +13,10 @@ tests are by no means extensive or complete, and really are the collaterals.
 The general discussion about the implementation of Project Lambda:
   http://mail.openjdk.java.net/mailman/listinfo/lambda-dev
 
+JSR335 EG observers lists:
+  http://mail.openjdk.java.net/mailman/listinfo/lambda-libs-spec-observers
+  http://mail.openjdk.java.net/mailman/listinfo/lambda-spec-observers
+
 Binary builds for JDK8 with Lambda support:
   http://jdk8.java.net/lambda
 
