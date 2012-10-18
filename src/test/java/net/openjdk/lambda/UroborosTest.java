@@ -1,4 +1,4 @@
-package com.oracle.lambda;
+package net.openjdk.lambda;
 
 import junit.framework.Assert;
 import org.junit.Test;

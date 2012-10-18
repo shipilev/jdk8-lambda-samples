@@ -1,4 +1,4 @@
-package com.oracle.streams;
+package net.openjdk.streams;
 
 import junit.framework.Assert;
 import org.junit.Before;

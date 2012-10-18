@@ -1,0 +1,15 @@
+JDK8 Lambda Samples
+--------------------------------------------------------------------------
+
+These tests were used on local JUGs to highlight different things about
+upcoming Project Lambda (support for lambda expressions in Java 8). The
+tests are by no means extensive or complete, and really are the collaterals.
+
+The general discussion about the implementation of Project Lambda:
+  http://mail.openjdk.java.net/mailman/listinfo/lambda-dev
+
+Binary builds for JDK8 with Lambda support:
+  http://jdk8.java.net/lambda
+
+General information about the project:
+  http://openjdk.java.net/projects/lambda/

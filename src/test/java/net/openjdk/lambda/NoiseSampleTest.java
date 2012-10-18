@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.functions.Factory;
 
+// FIXME: This test sometimes has problems with type inference
 public class NoiseSampleTest {
 
     public static class Counter {
@@ -58,7 +59,7 @@ public class NoiseSampleTest {
     @Test
     public void testL0() {
         Map<String, Map<String, Counter>> map =
-                new ComputeMap<String, Map<String, Counter>>(() -> new ComputeMap<>(() -> new Counter()));
+                new ComputeMap<String, Map<String, Counter>>(() -> new ComputeMap<String, Counter>(() -> new Counter()));
 
         Assert.assertEquals(1, map.get("foo").get("bar").inc());
         Assert.assertEquals(2, map.get("foo").get("bar").inc());
@@ -66,7 +67,7 @@ public class NoiseSampleTest {
 
     @Test
     public void testL1() {
-        Factory<Map<String, Counter>> mapFactory = () -> new ComputeMap<>(() -> new Counter());
+        Factory<Map<String, Counter>> mapFactory = () -> new ComputeMap<String, Counter>(() -> new Counter());
         Map<String, Map<String, Counter>> map = new ComputeMap<>(mapFactory);
 
         Assert.assertEquals(1, map.get("foo").get("bar").inc());
@@ -76,7 +77,7 @@ public class NoiseSampleTest {
     @Test
     public void testL2() {
         Map<String, Map<String, Counter>> map =
-                new ComputeMap<>((Factory<Map<String, Counter>>) () -> new ComputeMap<>(() -> new Counter()));
+                new ComputeMap<>((Factory<Map<String, Counter>>) () -> new ComputeMap<String, Counter>(() -> new Counter()));
 
         Assert.assertEquals(1, map.get("foo").get("bar").inc());
         Assert.assertEquals(2, map.get("foo").get("bar").inc());
@@ -85,7 +86,7 @@ public class NoiseSampleTest {
     @Test
     public void testR() {
         Map<String, Map<String, Counter>> map =
-                new ComputeMap<String, Map<String, Counter>>(() -> new ComputeMap<>(Counter::new));
+                new ComputeMap<String, Map<String, Counter>>(() -> new ComputeMap<String, Counter>(Counter::new));
 
         Assert.assertEquals(1, map.get("foo").get("bar").inc());
         Assert.assertEquals(2, map.get("foo").get("bar").inc());
