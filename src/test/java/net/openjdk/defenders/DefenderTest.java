@@ -1,4 +1,4 @@
-package com.oracle.defenders;
+package net.openjdk.defenders;
 
 import junit.framework.Assert;
 import org.junit.Test;
