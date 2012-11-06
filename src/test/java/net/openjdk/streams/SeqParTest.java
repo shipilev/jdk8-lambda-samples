@@ -26,14 +26,18 @@ public class SeqParTest {
 
     @Test
     public void testSeq() {
-        Optional<Integer> result = list.stream().reduce(Math::max);
-        Assert.assertEquals(Integer.valueOf(COUNT), result.get());
+        Assert.assertEquals(
+                Integer.valueOf(COUNT),
+                list.stream().reduce(Math::max).get()
+        );
     }
 
     @Test
     public void testPar() {
-        Optional<Integer> result = list.parallel().reduce(Math::max);
-        Assert.assertEquals(Integer.valueOf(COUNT), result.get());
+        Assert.assertEquals(
+                Integer.valueOf(COUNT),
+                list.parallel().reduce(Math::max).get()
+        );
     }
 
 }
