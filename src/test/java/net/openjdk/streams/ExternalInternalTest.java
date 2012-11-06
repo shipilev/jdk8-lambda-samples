@@ -28,7 +28,7 @@ public class ExternalInternalTest {
         StringBuilder sb = new StringBuilder();
 
         List<String> strings = Arrays.asList("Foo", "Bar", "Baz");
-        strings.forEach((s) -> { sb.append(s); });
+        strings.forEach(sb::append);
 
         Assert.assertEquals(
                 "FooBarBaz",

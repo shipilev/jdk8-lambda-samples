@@ -19,7 +19,7 @@ public class DefenderTest {
 
     public interface LegacyInterface {
         String legacyMethod();
-        String newMethod() default { return "The beauty is in the eye of the defender"; };
+        String newMethod() default { return "The beauty is in the eye of the defender"; }
     }
 
     public class LegacyClass implements LegacyInterface {
