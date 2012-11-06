@@ -1,10 +1,10 @@
 package com.oracle.streams;
 
-import oracle.micro.api.annotations.GenerateMicroBenchmark;
-import oracle.micro.api.annotations.OutputTimeUnit;
-import oracle.micro.api.annotations.Setup;
+import org.openjdk.jmh.annotations.GenerateMicroBenchmark;
+import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Setup;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -18,19 +18,20 @@ public class SeqParBench {
 
     @Setup
     public void setup() {
-        list = new ArrayList<>(COUNT);
+        Integer[] l = new Integer[COUNT];
         for (int c = 1; c <= COUNT; c++) {
-            list.add(c);
+            l[c - 1] = c;
         }
+        list = Arrays.asList(l);
         Collections.shuffle(list);
     }
 
-//    @GenerateMicroBenchmark
+    @GenerateMicroBenchmark
     public Integer bench_1_Seq() {
         return list.stream().reduce(Math::max).get();
     }
 
-//    @GenerateMicroBenchmark
+    @GenerateMicroBenchmark
     public Integer bench_2_Par() {
         return list.parallel().reduce(Math::max).get();
     }

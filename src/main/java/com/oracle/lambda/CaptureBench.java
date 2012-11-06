@@ -1,8 +1,8 @@
 package com.oracle.lambda;
 
-import oracle.micro.api.annotations.BenchmarkType;
-import oracle.micro.api.annotations.GenerateMicroBenchmark;
-import oracle.micro.api.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.BenchmarkType;
+import org.openjdk.jmh.annotations.GenerateMicroBenchmark;
+import org.openjdk.jmh.annotations.OutputTimeUnit;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,7 +15,7 @@ public class CaptureBench {
 
     public volatile int wh0 = 0;
 
-//    @GenerateMicroBenchmark(BenchmarkType.AverageTimePerOp)
+    @GenerateMicroBenchmark(BenchmarkType.AverageTimePerOp)
     public Fooable capture_inner_0() {
         return new Fooable() {
             @Override
@@ -25,7 +25,7 @@ public class CaptureBench {
         };
     }
 
-//    @GenerateMicroBenchmark(BenchmarkType.AverageTimePerOp)
+    @GenerateMicroBenchmark(BenchmarkType.AverageTimePerOp)
     public Fooable capture_inner_1() {
         final int l0 = wh0;
         return new Fooable() {
@@ -36,12 +36,12 @@ public class CaptureBench {
         };
     }
 
-//    @GenerateMicroBenchmark(BenchmarkType.AverageTimePerOp)
+    @GenerateMicroBenchmark(BenchmarkType.AverageTimePerOp)
     public Fooable capture_lambda_0() {
         return () -> "42";
     }
 
-//    @GenerateMicroBenchmark(BenchmarkType.AverageTimePerOp)
+    @GenerateMicroBenchmark(BenchmarkType.AverageTimePerOp)
     public Fooable capture_lambda_1() {
         final int l0 = wh0;
         return () -> "42" + l0;

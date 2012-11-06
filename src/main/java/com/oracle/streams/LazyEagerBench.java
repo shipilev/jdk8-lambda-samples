@@ -1,8 +1,8 @@
 package com.oracle.streams;
 
-import oracle.micro.api.annotations.GenerateMicroBenchmark;
-import oracle.micro.api.annotations.OutputTimeUnit;
-import oracle.micro.api.annotations.Setup;
+import org.openjdk.jmh.annotations.GenerateMicroBenchmark;
+import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Setup;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,7 +26,7 @@ public class LazyEagerBench {
         Collections.shuffle(list);
     }
 
-//    @GenerateMicroBenchmark
+    @GenerateMicroBenchmark
     public int bench_1_Iterator() {
         int sum = 0;
         Iterator<Integer> iterator = list.stream()
@@ -42,7 +42,7 @@ public class LazyEagerBench {
         return sum;
     }
 
-//    @GenerateMicroBenchmark
+    @GenerateMicroBenchmark
     public int bench_2_ForEach() {
         Counter c = new Counter();
         list.stream()
