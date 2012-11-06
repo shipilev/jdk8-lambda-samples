@@ -16,7 +16,7 @@ public class PeekTest {
         Stream<String> stream1 = Arrays.asList("Foo", "Marco", "Bar", "Polo", "Baz").stream();
         Stream<String> stream2 = stream1.filter((s) -> s.length() == 3);
 
-        Iterator<String> i1 = stream2.iterator();
+        Iterator<String> i1 = stream1.iterator();
         Iterator<String> i2 = stream2.iterator();
 
         Assert.assertTrue(i1.hasNext());

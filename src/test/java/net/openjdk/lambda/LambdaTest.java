@@ -53,22 +53,22 @@ public class LambdaTest {
 
     @Test
     public void testOneArg0() {
-        // Mapper<T, R>  ~    R map(T t);
-        Mapper<String, Integer> f = (String s) -> Integer.parseInt(s);
+        // Mapper<R, T>  ~    R map(T t);
+        Mapper<Integer, String> f = (String s) -> Integer.parseInt(s);
         Assert.assertEquals(Integer.valueOf(0), f.map("0"));
         Assert.assertEquals(Integer.valueOf(1), f.map("1"));
     }
 
     @Test
     public void testOneArg1() {
-        Mapper<String, Integer> f = (s) -> Integer.parseInt(s);
+        Mapper<Integer, String> f = (s) -> Integer.parseInt(s);
         Assert.assertEquals(Integer.valueOf(0), f.map("0"));
         Assert.assertEquals(Integer.valueOf(1), f.map("1"));
     }
 
     @Test
     public void testOneArg2() {
-        Mapper<String, Integer> f = s -> Integer.parseInt(s);
+        Mapper<Integer, String> f = s -> Integer.parseInt(s);
         Assert.assertEquals(Integer.valueOf(0), f.map("0"));
         Assert.assertEquals(Integer.valueOf(1), f.map("1"));
     }

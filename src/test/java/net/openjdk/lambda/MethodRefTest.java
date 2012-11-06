@@ -1,4 +1,4 @@
-package com.oracle.lambda;
+package net.openjdk.lambda;
 
 import junit.framework.Assert;
 import org.junit.Test;
@@ -62,14 +62,14 @@ public class MethodRefTest {
 
     @Test
     public void testParseInt(){
-        Mapper<String, Integer> f = Integer::parseInt;
+        Mapper<Integer, String> f = Integer::parseInt;
         Assert.assertEquals(Integer.valueOf(0), f.map("0"));
         Assert.assertEquals(Integer.valueOf(1), f.map("1"));
     }
 
     @Test
     public void testConstructor(){
-        Mapper<String, Integer> f = Integer::new;
+        Mapper<Integer, String> f = Integer::new;
         Assert.assertEquals(Integer.valueOf(0), f.map("0"));
         Assert.assertEquals(Integer.valueOf(1), f.map("1"));
     }
@@ -104,7 +104,7 @@ public class MethodRefTest {
 
     @Test
     public void testConstructor1(){
-        Mapper<Integer, Counter> f = Counter::new;
+        Mapper<Counter, Integer> f = Counter::new;
         Assert.assertEquals(1, f.map(1).get());
         Assert.assertEquals(42, f.map(42).get());
     }
