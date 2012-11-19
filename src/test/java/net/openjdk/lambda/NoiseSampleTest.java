@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.functions.Factory;
+import java.util.function.Supplier;
 
 // FIXME: This test sometimes has problems with type inference
 public class NoiseSampleTest {
@@ -37,13 +37,13 @@ public class NoiseSampleTest {
     public void test() {
         Map<String, Map<String, Counter>> map =
                 new ComputeMap<>(
-                        new Factory<Map<String, Counter>>() {
+                        new Supplier<Map<String, Counter>>() {
                             @Override
-                            public Map<String, Counter> make() {
+                            public Map<String, Counter> get() {
                                 return new ComputeMap<>(
-                                        new Factory<Counter>() {
+                                        new Supplier<Counter>() {
                                             @Override
-                                            public Counter make() {
+                                            public Counter get() {
                                                 return new Counter();
                                             }
                                         }
@@ -67,7 +67,7 @@ public class NoiseSampleTest {
 
     @Test
     public void testL1() {
-        Factory<Map<String, Counter>> mapFactory = () -> new ComputeMap<String, Counter>(() -> new Counter());
+        Supplier<Map<String, Counter>> mapFactory = () -> new ComputeMap<String, Counter>(() -> new Counter());
         Map<String, Map<String, Counter>> map = new ComputeMap<>(mapFactory);
 
         Assert.assertEquals(1, map.get("foo").get("bar").inc());
@@ -77,7 +77,7 @@ public class NoiseSampleTest {
     @Test
     public void testL2() {
         Map<String, Map<String, Counter>> map =
-                new ComputeMap<>((Factory<Map<String, Counter>>) () -> new ComputeMap<String, Counter>(() -> new Counter()));
+                new ComputeMap<>((Supplier<Map<String, Counter>>) () -> new ComputeMap<String, Counter>(() -> new Counter()));
 
         Assert.assertEquals(1, map.get("foo").get("bar").inc());
         Assert.assertEquals(2, map.get("foo").get("bar").inc());
@@ -101,9 +101,9 @@ public class NoiseSampleTest {
     @SuppressWarnings("serial")
     public static class ComputeMap<K, V> extends HashMap<K, V> {
 
-        private final Factory<V> factory;
+        private final Supplier<V> factory;
 
-        public ComputeMap(Factory<V> factory) {
+        public ComputeMap(Supplier<V> factory) {
             this.factory = factory;
         }
 
@@ -113,7 +113,7 @@ public class NoiseSampleTest {
             K k = (K) key;
             V v = super.get(key);
             if (v == null) {
-                v = factory.make();
+                v = factory.get();
                 super.put(k, v);
             }
             return v;

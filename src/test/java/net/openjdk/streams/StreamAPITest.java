@@ -6,8 +6,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.functions.Block;
-import java.util.streams.Stream;
+import java.util.function.Block;
+import java.util.stream.Stream;
 
 public class StreamAPITest {
 
@@ -39,6 +39,7 @@ public class StreamAPITest {
                 Arrays.asList("Foo", "Bar", "Baz")
                         .stream()
                         .map((s) -> s.length())
+                        .boxed()
                         .into(new ArrayList<Integer>())
         );
     }
@@ -61,7 +62,7 @@ public class StreamAPITest {
                 Arrays.asList("Foo", "Bar", "Baz"),
                 Arrays.asList("Foo Bar Baz")
                         .stream()
-                        .flatMap((Block<? super String> sink, String element) -> Arrays.asStream(element.split(" ")).forEach(sink))
+                        .flatMap((Block<? super String> sink, String element) -> Arrays.stream(element.split(" ")).forEach(sink))
                         .into(new ArrayList<String>()));
     }
 

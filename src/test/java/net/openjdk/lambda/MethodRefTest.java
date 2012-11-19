@@ -5,10 +5,10 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.functions.Block;
-import java.util.functions.Factory;
-import java.util.functions.Mapper;
-import java.util.functions.Predicate;
+import java.util.function.Block;
+import java.util.function.Supplier;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class MethodRefTest {
 
@@ -62,16 +62,16 @@ public class MethodRefTest {
 
     @Test
     public void testParseInt(){
-        Mapper<Integer, String> f = Integer::parseInt;
-        Assert.assertEquals(Integer.valueOf(0), f.map("0"));
-        Assert.assertEquals(Integer.valueOf(1), f.map("1"));
+        Function<String, Integer> f = Integer::parseInt;
+        Assert.assertEquals(Integer.valueOf(0), f.apply("0"));
+        Assert.assertEquals(Integer.valueOf(1), f.apply("1"));
     }
 
     @Test
     public void testConstructor(){
-        Mapper<Integer, String> f = Integer::new;
-        Assert.assertEquals(Integer.valueOf(0), f.map("0"));
-        Assert.assertEquals(Integer.valueOf(1), f.map("1"));
+        Function<String, Integer> f = Integer::new;
+        Assert.assertEquals(Integer.valueOf(0), f.apply("0"));
+        Assert.assertEquals(Integer.valueOf(1), f.apply("1"));
     }
 
     public static class Counter {
@@ -97,16 +97,16 @@ public class MethodRefTest {
 
     @Test
     public void testConstructor0(){
-        Factory<Counter> f = Counter::new;
-        Assert.assertEquals(0, f.make().get());
-        Assert.assertEquals(1, f.make().inc());
+        Supplier<Counter> f = Counter::new;
+        Assert.assertEquals(0, f.get().get());
+        Assert.assertEquals(1, f.get().inc());
     }
 
     @Test
     public void testConstructor1(){
-        Mapper<Counter, Integer> f = Counter::new;
-        Assert.assertEquals(1, f.map(1).get());
-        Assert.assertEquals(42, f.map(42).get());
+        Function<Integer, Counter> f = Counter::new;
+        Assert.assertEquals(1, f.apply(1).get());
+        Assert.assertEquals(42, f.apply(42).get());
     }
 
 }

@@ -5,9 +5,9 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.functions.Block;
-import java.util.functions.Factory;
-import java.util.functions.Mapper;
+import java.util.function.Block;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class LambdaTest {
 
@@ -46,31 +46,31 @@ public class LambdaTest {
 
     @Test
     public void testNoArgs() {
-        // Factory<T>  ~   T make();
-        Factory<Integer> ultimateAnswerFactory = () -> 42;
-        Assert.assertTrue(42 == ultimateAnswerFactory.make());
+        // Supplier<T>  ~   T make();
+        Supplier<Integer> ultimateAnswerFactory = () -> 42;
+        Assert.assertTrue(42 == ultimateAnswerFactory.get());
     }
 
     @Test
     public void testOneArg0() {
         // Mapper<R, T>  ~    R map(T t);
-        Mapper<Integer, String> f = (String s) -> Integer.parseInt(s);
-        Assert.assertEquals(Integer.valueOf(0), f.map("0"));
-        Assert.assertEquals(Integer.valueOf(1), f.map("1"));
+        Function<String, Integer> f = (String s) -> Integer.parseInt(s);
+        Assert.assertEquals(Integer.valueOf(0), f.apply("0"));
+        Assert.assertEquals(Integer.valueOf(1), f.apply("1"));
     }
 
     @Test
     public void testOneArg1() {
-        Mapper<Integer, String> f = (s) -> Integer.parseInt(s);
-        Assert.assertEquals(Integer.valueOf(0), f.map("0"));
-        Assert.assertEquals(Integer.valueOf(1), f.map("1"));
+        Function<String, Integer> f = (s) -> Integer.parseInt(s);
+        Assert.assertEquals(Integer.valueOf(0), f.apply("0"));
+        Assert.assertEquals(Integer.valueOf(1), f.apply("1"));
     }
 
     @Test
     public void testOneArg2() {
-        Mapper<Integer, String> f = s -> Integer.parseInt(s);
-        Assert.assertEquals(Integer.valueOf(0), f.map("0"));
-        Assert.assertEquals(Integer.valueOf(1), f.map("1"));
+        Function<String, Integer> f = s -> Integer.parseInt(s);
+        Assert.assertEquals(Integer.valueOf(0), f.apply("0"));
+        Assert.assertEquals(Integer.valueOf(1), f.apply("1"));
     }
 
     @Test

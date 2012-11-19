@@ -3,7 +3,7 @@ package net.openjdk.lambda;
 import junit.framework.Assert;
 import org.junit.Test;
 
-import java.util.functions.IntUnaryOperator;
+import java.util.function.IntUnaryOperator;
 
 public class FibonacciTest {
 
