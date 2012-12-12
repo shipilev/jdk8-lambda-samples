@@ -1,4 +1,4 @@
-package net.openjdk.defenders;
+package net.openjdk.defaults;
 
 import org.junit.Assert;
 import org.junit.Ignore;

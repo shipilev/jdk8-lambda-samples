@@ -1,9 +1,9 @@
-package net.openjdk.defenders;
+package net.openjdk.defaults;
 
 import junit.framework.Assert;
 import org.junit.Test;
 
-public class DefenderTest {
+public class DefaultTest {
 
     @Test
     public void testNew() {
