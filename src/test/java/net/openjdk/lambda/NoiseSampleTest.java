@@ -7,10 +7,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-// FIXME: This test sometimes has problems with type inference
 public class NoiseSampleTest {
 
+    /**
+     * Mutable counter.
+     */
     public static class Counter {
+
+        private int count = 0;
 
         public Counter() {
             this(0);
@@ -19,8 +23,6 @@ public class NoiseSampleTest {
         public Counter(int count) {
             this.count = count;
         }
-
-        private int count = 0;
 
         public int inc() {
             return ++count;
@@ -31,66 +33,10 @@ public class NoiseSampleTest {
         }
     }
 
+    /**
+     * This is a weird collection we need to match
+     */
     Map<String, Map<String, Counter>> map;
-
-    @Test
-    public void test() {
-        Map<String, Map<String, Counter>> map =
-                new ComputeMap<>(
-                        new Supplier<Map<String, Counter>>() {
-                            @Override
-                            public Map<String, Counter> get() {
-                                return new ComputeMap<>(
-                                        new Supplier<Counter>() {
-                                            @Override
-                                            public Counter get() {
-                                                return new Counter();
-                                            }
-                                        }
-                                );
-                            }
-                        }
-                );
-
-        Assert.assertEquals(1, map.get("foo").get("bar").inc());
-        Assert.assertEquals(2, map.get("foo").get("bar").inc());
-    }
-
-    @Test
-    public void testL0() {
-        Map<String, Map<String, Counter>> map =
-                new ComputeMap<String, Map<String, Counter>>(() -> new ComputeMap<String, Counter>(() -> new Counter()));
-
-        Assert.assertEquals(1, map.get("foo").get("bar").inc());
-        Assert.assertEquals(2, map.get("foo").get("bar").inc());
-    }
-
-    @Test
-    public void testL1() {
-        Supplier<Map<String, Counter>> mapFactory = () -> new ComputeMap<String, Counter>(() -> new Counter());
-        Map<String, Map<String, Counter>> map = new ComputeMap<>(mapFactory);
-
-        Assert.assertEquals(1, map.get("foo").get("bar").inc());
-        Assert.assertEquals(2, map.get("foo").get("bar").inc());
-    }
-
-    @Test
-    public void testL2() {
-        Map<String, Map<String, Counter>> map =
-                new ComputeMap<>((Supplier<Map<String, Counter>>) () -> new ComputeMap<String, Counter>(() -> new Counter()));
-
-        Assert.assertEquals(1, map.get("foo").get("bar").inc());
-        Assert.assertEquals(2, map.get("foo").get("bar").inc());
-    }
-
-    @Test
-    public void testR() {
-        Map<String, Map<String, Counter>> map =
-                new ComputeMap<String, Map<String, Counter>>(() -> new ComputeMap<String, Counter>(Counter::new));
-
-        Assert.assertEquals(1, map.get("foo").get("bar").inc());
-        Assert.assertEquals(2, map.get("foo").get("bar").inc());
-    }
 
     /**
      * Computing map.
@@ -118,6 +64,65 @@ public class NoiseSampleTest {
             }
             return v;
         }
+    }
+
+    @Test
+    public void test() {
+        Map<String, Map<String, Counter>> map =
+                new ComputeMap<>(
+                        new Supplier<Map<String, Counter>>() {
+                            @Override
+                            public Map<String, Counter> get() {
+                                return new ComputeMap<>(
+                                        new Supplier<Counter>() {
+                                            @Override
+                                            public Counter get() {
+                                                return new Counter();
+                                            }
+                                        }
+                                );
+                            }
+                        }
+                );
+
+        Assert.assertEquals(1, map.get("foo").get("bar").inc());
+        Assert.assertEquals(2, map.get("foo").get("bar").inc());
+    }
+
+    @Test
+    public void testL0() {
+        Map<String, Map<String, Counter>> map =
+                new ComputeMap<String, Map<String, Counter>>(() -> new ComputeMap<>(() -> new Counter()));
+
+        Assert.assertEquals(1, map.get("foo").get("bar").inc());
+        Assert.assertEquals(2, map.get("foo").get("bar").inc());
+    }
+
+    @Test
+    public void testL1() {
+        Supplier<Map<String, Counter>> mapFactory = () -> new ComputeMap<>(() -> new Counter());
+        Map<String, Map<String, Counter>> map = new ComputeMap<>(mapFactory);
+
+        Assert.assertEquals(1, map.get("foo").get("bar").inc());
+        Assert.assertEquals(2, map.get("foo").get("bar").inc());
+    }
+
+    @Test
+    public void testL2() {
+        Map<String, Map<String, Counter>> map =
+                new ComputeMap<>((Supplier<Map<String, Counter>>) () -> new ComputeMap<>(() -> new Counter()));
+
+        Assert.assertEquals(1, map.get("foo").get("bar").inc());
+        Assert.assertEquals(2, map.get("foo").get("bar").inc());
+    }
+
+    @Test
+    public void testR() {
+        Map<String, Map<String, Counter>> map =
+                new ComputeMap<String, Map<String, Counter>>(() -> new ComputeMap<>(Counter::new));
+
+        Assert.assertEquals(1, map.get("foo").get("bar").inc());
+        Assert.assertEquals(2, map.get("foo").get("bar").inc());
     }
 
 }
