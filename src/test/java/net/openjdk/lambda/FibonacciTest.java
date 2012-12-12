@@ -21,7 +21,7 @@ public class FibonacciTest {
 
     @Test
     public void test10_static() {
-        Assert.assertEquals(55, fib.operateAsInt(10));
+        Assert.assertEquals(55, fib_static.operateAsInt(10));
     }
 
 //    @Test
