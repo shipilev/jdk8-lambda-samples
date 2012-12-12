@@ -18,7 +18,7 @@
     (x)-> aka x->  SHOW: LambdaTest::testOneArg*
     (x,y) -> <expr>
     (x,y) -> { ....., return <expr>; }  SHOW: LambdaTest::testCmpLambda2 & 3
-    (x,y) -> { ....., ; }  aka void   SHOW: LambdaTest::testBlock*
+    (x,y) -> { ....., ; }  aka void     SHOW: LambdaTest::testBlock*
 
   SHOW: UroborosTest
 
@@ -31,7 +31,7 @@
         parenthesized expression occurring in any of the above contexts - i.e. FI f = (()-> 42);
 
 
-*   lambda       vs     anon/innerClass
+*   lambda       vs     anon/innerClass  (obsolete; do not tell here ?)
  - linkage              - class loading
  - capture              - creation (new)
  - invocation           - invocation
@@ -42,6 +42,8 @@
 
 * recursive lambda aka capture itself
   SHOW: FibonacciTest
+  - static - incorporated into lambda body
+  - instance - really we capture 'this'
 
 * Method Ref
   - syntax A::b
@@ -62,5 +64,5 @@
   - dynamic inner
   - dynamic methodHandleProxy
 
-* serialization
+* serialization?
 -------------------------------------------------------------------

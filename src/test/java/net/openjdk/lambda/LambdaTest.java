@@ -46,14 +46,14 @@ public class LambdaTest {
 
     @Test
     public void testNoArgs() {
-        // Supplier<T>  ~   T make();
+        // Supplier<T>  ~   T get();
         Supplier<Integer> ultimateAnswerFactory = () -> 42;
         Assert.assertTrue(42 == ultimateAnswerFactory.get());
     }
 
     @Test
     public void testOneArg0() {
-        // Mapper<R, T>  ~    R map(T t);
+        // Function<T, R>  ~   R apply(T t);
         Function<String, Integer> f = (String s) -> Integer.parseInt(s);
         Assert.assertEquals(Integer.valueOf(0), f.apply("0"));
         Assert.assertEquals(Integer.valueOf(1), f.apply("1"));
@@ -97,14 +97,13 @@ public class LambdaTest {
 
     @Test
     public void testBlock0() {
-        // Block<T>  ~  void apply(T t);
+        // Block<T>  ~  void accept(T t);
         Block<String> b = s -> { System.out.println(s);};
         Arrays.asList("Foo", "Bar", "Baz", "Baz", "Foo", "Bar").forEach(b);
     }
 
     @Test
     public void testBlock1() {
-        // Block<T>  ~  void apply(T t);
         Block<String> b = s -> System.out.println(s);
         Arrays.asList("Foo", "Bar", "Baz", "Baz", "Foo", "Bar").forEach(b);
     }
