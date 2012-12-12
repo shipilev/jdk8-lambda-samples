@@ -1,17 +1,19 @@
 package net.openjdk.streams;
 
 import junit.framework.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.streams.Stream;
+import java.util.stream.Stream;
 
 public class PeekTest {
 
     @Test
+    @Ignore // prohibited now
     public void testPeek() {
         Stream<String> stream1 = Arrays.asList("Foo", "Marco", "Bar", "Polo", "Baz").stream();
         Stream<String> stream2 = stream1.filter((s) -> s.length() == 3);

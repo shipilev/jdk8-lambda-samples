@@ -4,6 +4,12 @@ Defenders
 SHOW: Defender test
  - go thorough interface evolution
 
+SHOW: Guava test
+ - show that defaults can run the code unchanged
+
+SHOW: QDublin test
+ - static methods
+
 SHOW: Iterator.remove()!
 
 SHOW: Mapper with a few defaults.

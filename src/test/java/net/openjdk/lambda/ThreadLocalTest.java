@@ -4,7 +4,6 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.functions.Factory;
 
 public class ThreadLocalTest {
 
@@ -33,8 +32,7 @@ public class ThreadLocalTest {
     @Test
     public void threadLocalMRef() {
         AtomicInteger counter = new AtomicInteger(0);
-        Factory<Integer> factory = counter::incrementAndGet;
-        ThreadLocal<Integer> tlNumber = new ThreadLocal<>(factory);
+        ThreadLocal<Integer> tlNumber = new ThreadLocal<>(counter::incrementAndGet);
         Assert.assertEquals(tlNumber.get(), (Integer)1);
         Assert.assertEquals(tlNumber.get(), (Integer)1);
     }

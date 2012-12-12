@@ -6,8 +6,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.functions.Block;
-import java.util.streams.Stream;
+import java.util.function.FlatMapper;
+import java.util.stream.Stream;
 
 public class StreamAPITest {
 
@@ -39,6 +39,7 @@ public class StreamAPITest {
                 Arrays.asList("Foo", "Bar", "Baz")
                         .stream()
                         .map((s) -> s.length())
+                        .boxed()
                         .into(new ArrayList<Integer>())
         );
     }
@@ -57,11 +58,13 @@ public class StreamAPITest {
 
     @Test
     public void test5() {
+        // FIXME: explicit FlatMapper to dodge javac type inference deficiency
+        FlatMapper<String, String> mapper = (sink, element) -> Arrays.stream(element.split(" ")).forEach(sink);
         Assert.assertEquals(
                 Arrays.asList("Foo", "Bar", "Baz"),
                 Arrays.asList("Foo Bar Baz")
                         .stream()
-                        .flatMap((Block<? super String> sink, String element) -> Arrays.asStream(element.split(" ")).forEach(sink))
+                        .flatMap(mapper)
                         .into(new ArrayList<String>()));
     }
 

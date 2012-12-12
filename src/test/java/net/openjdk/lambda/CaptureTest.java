@@ -4,7 +4,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import java.util.Comparator;
-import java.util.functions.Predicate;
+import java.util.function.Predicate;
 
 public class CaptureTest {
 

@@ -1,13 +1,14 @@
 package net.openjdk.streams;
 
 import junit.framework.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.streams.Stream;
+import java.util.stream.Stream;
 
 public class LazyEagerTest {
 
@@ -32,6 +33,7 @@ public class LazyEagerTest {
     }
 
     @Test
+    @Ignore // prohibited now
     public void testShortCircuit() {
         Stream<String> stream = Arrays.asList("Foo", "Marco", "Bar", "Polo", "Baz")
                 .stream()
