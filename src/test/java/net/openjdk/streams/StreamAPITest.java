@@ -6,7 +6,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.FlatMapper;
+import java.util.function.BiBlock;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class StreamAPITest {
@@ -28,7 +29,7 @@ public class StreamAPITest {
                 Arrays.asList("Foo", "Bar", "Baz")
                         .stream()
                         .filter((s) -> s.startsWith("B"))
-                        .into(new ArrayList<String>())
+                        .collect(Collectors.toList())
         );
     }
 
@@ -40,32 +41,33 @@ public class StreamAPITest {
                         .stream()
                         .map((s) -> s.length())
                         .boxed()
-                        .into(new ArrayList<Integer>())
+                        .collect(Collectors.toList())
         );
     }
 
     @Test
     public void test4() {
         Assert.assertEquals(
-                Integer.valueOf(9),
+                9,
                 Arrays.asList("Foo", "BarBar", "BazBazBaz")
                         .stream()
                         .map(s -> s.length())
                         .reduce((l, r) -> (l > r ? l : r))
-                        .get()
+                        .getAsInt()
         );
     }
 
     @Test
     public void test5() {
-        // FIXME: explicit FlatMapper to dodge javac type inference deficiency
-        FlatMapper<String, String> mapper = (sink, element) -> Arrays.stream(element.split(" ")).forEach(sink);
+        // FIXME: explicit MultiFunction to dodge javac type inference deficiency
+        BiBlock<Stream.Downstream<String>, String> multiplicator = (collector, element) -> collector.send(element.split(" "));
         Assert.assertEquals(
                 Arrays.asList("Foo", "Bar", "Baz"),
                 Arrays.asList("Foo Bar Baz")
                         .stream()
-                        .flatMap(mapper)
-                        .into(new ArrayList<String>()));
+                        .explode(multiplicator)
+                        .collect(Collectors.toList())
+        );
     }
 
     @SuppressWarnings("serial")
@@ -76,7 +78,7 @@ public class StreamAPITest {
                 Arrays.asList("Foo", "Bar", "Baz", "Baz", "Foo", "Bar")
                         .stream()
                         .uniqueElements()
-                        .into(new ArrayList<String>())
+                        .collect(Collectors.toList())
         );
     }
 
@@ -87,19 +89,9 @@ public class StreamAPITest {
                 Arrays.asList("Foo", "Bar", "Baz")
                         .stream()
                         .sorted((o1, o2) -> o1.compareTo(o2))
-                        .into(new ArrayList<String>())
+                        .collect(Collectors.toList())
         );
     }
 
-    @Test
-    public void test8() {
-        Assert.assertEquals(
-                Arrays.asList("Foo", "FooBar", "FooBarBaz"),
-                Arrays.asList("Foo", "Bar", "Baz")
-                        .stream()
-                        .cumulate((l, r) -> l + r)
-                        .into(new ArrayList<String>())
-        );
-    }
 
 }

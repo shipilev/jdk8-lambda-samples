@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LazyEagerTest {
@@ -54,7 +55,7 @@ public class LazyEagerTest {
         List<String> list = Arrays.asList("Foo", "Marco", "Bar", "Polo", "Baz")
                 .stream()
                 .filter((s) -> { invocations++; return s.length() == 3; })
-                .into(new ArrayList<String>());
+                .collect(Collectors.<String>toList());
 
         Assert.assertEquals(3, list.size());
         Assert.assertEquals(5, invocations);

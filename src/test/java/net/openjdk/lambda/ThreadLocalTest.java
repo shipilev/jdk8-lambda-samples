@@ -23,7 +23,7 @@ public class ThreadLocalTest {
     @Test
     public void threadLocalLambda() {
         AtomicInteger counter = new AtomicInteger(0);
-        ThreadLocal<Integer> tlNumber = new ThreadLocal<>(() -> counter.incrementAndGet());
+        ThreadLocal<Integer> tlNumber = ThreadLocal.withInitial(() -> counter.incrementAndGet());
         Assert.assertEquals(tlNumber.get(), (Integer)1);
         Assert.assertEquals(tlNumber.get(), (Integer)1);
     }
@@ -31,7 +31,7 @@ public class ThreadLocalTest {
     @Test
     public void threadLocalMRef() {
         AtomicInteger counter = new AtomicInteger(0);
-        ThreadLocal<Integer> tlNumber = new ThreadLocal<>(counter::incrementAndGet);
+        ThreadLocal<Integer> tlNumber = ThreadLocal.withInitial(counter::incrementAndGet);
         Assert.assertEquals(tlNumber.get(), (Integer)1);
         Assert.assertEquals(tlNumber.get(), (Integer)1);
     }

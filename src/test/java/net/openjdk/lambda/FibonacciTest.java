@@ -9,19 +9,19 @@ public class FibonacciTest {
 
     // Фибоначчийн тоог хүн төрөлхтөн өөрсдийн ахуй (source: Wikipedia MN)
     private IntUnaryOperator fib =
-            (n) -> (n < 2) ? n : fib.operateAsInt(n - 1) + fib.operateAsInt(n - 2);
+            (n) -> (n < 2) ? n : fib.applyAsInt(n - 1) + fib.applyAsInt(n - 2);
 
     @Test
     public void test10() {
-        Assert.assertEquals(55, fib.operateAsInt(10));
+        Assert.assertEquals(55, fib.applyAsInt(10));
     }
 
     private static IntUnaryOperator fib_static =
-            (n) -> (n < 2) ? n : fib_static.operateAsInt(n - 1) + fib_static.operateAsInt(n - 2);
+            (n) -> (n < 2) ? n : fib_static.applyAsInt(n - 1) + fib_static.applyAsInt(n - 2);
 
     @Test
     public void test10_static() {
-        Assert.assertEquals(55, fib_static.operateAsInt(10));
+        Assert.assertEquals(55, fib_static.applyAsInt(10));
     }
 
 //    @Test
