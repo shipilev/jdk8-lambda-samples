@@ -36,7 +36,7 @@ public class SeqParTest {
     public void testPar() {
         Assert.assertEquals(
                 Integer.valueOf(COUNT),
-                list.parallel().reduce(Math::max).get()
+                list.parallelStream().reduce(Math::max).get()
         );
     }
 
