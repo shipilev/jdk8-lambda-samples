@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.function.Block;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -23,8 +23,8 @@ public class MethodRefTest {
 
     @Test
     public void testMethodRefInstance0() {
-    //  Block<String> b = s -> System.out.println(s);
-        Block<String> b = System.out::println;
+    //  Consumer<String> b = s -> System.out.println(s);
+        Consumer<String> b = System.out::println;
         Arrays.asList("Foo", "Bar", "Baz", "Baz", "Foo", "Bar").forEach(b);
     }
 
