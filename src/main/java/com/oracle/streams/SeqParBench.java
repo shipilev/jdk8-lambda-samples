@@ -33,7 +33,7 @@ public class SeqParBench {
 
     @GenerateMicroBenchmark
     public Integer bench_2_Par() {
-        return list.parallel().reduce(Math::max).get();
+        return list.parallelStream().reduce(Math::max).get();
     }
 
 }
