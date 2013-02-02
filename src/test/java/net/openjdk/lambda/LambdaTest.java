@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.function.Block;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -97,14 +97,14 @@ public class LambdaTest {
 
     @Test
     public void testBlock0() {
-        // Block<T>  ~  void accept(T t);
-        Block<String> b = s -> { System.out.println(s);};
+        // Consumer<T>  ~  void accept(T t);
+        Consumer<String> b = s -> { System.out.println(s);};
         Arrays.asList("Foo", "Bar", "Baz", "Baz", "Foo", "Bar").forEach(b);
     }
 
     @Test
     public void testBlock1() {
-        Block<String> b = s -> System.out.println(s);
+        Consumer<String> b = s -> System.out.println(s);
         Arrays.asList("Foo", "Bar", "Baz", "Baz", "Foo", "Bar").forEach(b);
     }
 

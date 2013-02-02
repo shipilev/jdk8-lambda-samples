@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.BiBlock;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -60,7 +60,7 @@ public class StreamAPITest {
     @Test
     public void test5() {
         // FIXME: explicit MultiFunction to dodge javac type inference deficiency
-        BiBlock<Stream.Downstream<String>, String> multiplicator = (collector, element) -> collector.send(element.split(" "));
+        BiConsumer<Stream.Downstream<String>, String> multiplicator = (collector, element) -> collector.send(element.split(" "));
         Assert.assertEquals(
                 Arrays.asList("Foo", "Bar", "Baz"),
                 Arrays.asList("Foo Bar Baz")
@@ -77,7 +77,7 @@ public class StreamAPITest {
                 new ArrayList<String>() {{ add("Foo"); add("Bar"); add("Baz"); }},
                 Arrays.asList("Foo", "Bar", "Baz", "Baz", "Foo", "Bar")
                         .stream()
-                        .uniqueElements()
+                        .distinct()
                         .collect(Collectors.toList())
         );
     }
