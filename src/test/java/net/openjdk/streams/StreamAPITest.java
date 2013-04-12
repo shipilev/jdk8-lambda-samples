@@ -40,8 +40,7 @@ public class StreamAPITest {
                 Arrays.asList(3, 3, 3),
                 Arrays.asList("Foo", "Bar", "Baz")
                         .stream()
-                        .map((s) -> s.length())
-                        .boxed()
+                        .map(String::length)
                         .collect(Collectors.toList())
         );
     }
@@ -49,24 +48,22 @@ public class StreamAPITest {
     @Test
     public void test4() {
         Assert.assertEquals(
-                9,
+                Integer.valueOf(9),
                 Arrays.asList("Foo", "BarBar", "BazBazBaz")
                         .stream()
-                        .map(s -> s.length())
+                        .map(String::length)
                         .reduce((l, r) -> (l > r ? l : r))
-                        .getAsInt()
+                        .get()
         );
     }
 
     @Test
     public void test5() {
-        // FIXME: explicit MultiFunction to dodge javac type inference deficiency
-        FlatMapper<String, String> multiplicator = (element, sink) -> Arrays.stream(element.split(" ")).forEach(sink);
         Assert.assertEquals(
                 Arrays.asList("Foo", "Bar", "Baz"),
                 Arrays.asList("Foo Bar Baz")
                         .stream()
-                        .flatMap(multiplicator)
+                        .flatMap((element) -> Arrays.stream(element.split(" ")))
                         .collect(Collectors.toList())
         );
     }
@@ -89,7 +86,7 @@ public class StreamAPITest {
                 Arrays.asList("Bar", "Baz", "Foo"),
                 Arrays.asList("Foo", "Bar", "Baz")
                         .stream()
-                        .sorted((o1, o2) -> o1.compareTo(o2))
+                        .sorted(String::compareTo)
                         .collect(Collectors.toList())
         );
     }

@@ -34,23 +34,6 @@ public class LazyEagerTest {
     }
 
     @Test
-    @Ignore // prohibited now
-    public void testShortCircuit() {
-        Stream<String> stream = Arrays.asList("Foo", "Marco", "Bar", "Polo", "Baz")
-                .stream()
-                .filter((s) -> { invocations++; return s.length() == 3; });
-
-        Assert.assertEquals("Foo", stream.findFirst().get());
-        Assert.assertEquals(1, invocations);
-
-        Assert.assertEquals("Bar", stream.findFirst().get());
-        Assert.assertEquals(3, invocations);
-
-        Assert.assertEquals("Baz", stream.findFirst().get());
-        Assert.assertEquals(5, invocations);
-    }
-
-    @Test
     public void testEager() {
         List<String> list = Arrays.asList("Foo", "Marco", "Bar", "Polo", "Baz")
                 .stream()
