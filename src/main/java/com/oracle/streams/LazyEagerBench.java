@@ -31,7 +31,7 @@ public class LazyEagerBench {
 
     @GenerateMicroBenchmark
     public int bench_1_Iterator() {
-        int sum = 0;
+        Counter c = new Counter();
         Iterator<Integer> iterator = list.stream()
                 .filter((i) -> (i & 0xF) == 0)
                 .filter((i) -> (i & 0xFF) == 0)
@@ -40,9 +40,9 @@ public class LazyEagerBench {
                 .iterator();
 
         while (iterator.hasNext()) {
-            sum += iterator.next();
+            c.add(iterator.next());
         }
-        return sum;
+        return c.sum;
     }
 
     @GenerateMicroBenchmark
