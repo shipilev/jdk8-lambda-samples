@@ -40,7 +40,7 @@ public class StreamAPITest {
                 Arrays.asList(3, 3, 3),
                 Arrays.asList("Foo", "Bar", "Baz")
                         .stream()
-                        .map((s) -> s.length())
+                        .map(String::length)
                         .collect(Collectors.toList())
         );
     }
@@ -51,7 +51,7 @@ public class StreamAPITest {
                 Integer.valueOf(9),
                 Arrays.asList("Foo", "BarBar", "BazBazBaz")
                         .stream()
-                        .map(s -> s.length())
+                        .map(String::length)
                         .reduce((l, r) -> (l > r ? l : r))
                         .get()
         );
@@ -86,7 +86,7 @@ public class StreamAPITest {
                 Arrays.asList("Bar", "Baz", "Foo"),
                 Arrays.asList("Foo", "Bar", "Baz")
                         .stream()
-                        .sorted((o1, o2) -> o1.compareTo(o2))
+                        .sorted(String::compareTo)
                         .collect(Collectors.toList())
         );
     }
