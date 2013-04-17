@@ -14,9 +14,8 @@ public class CollectorsTest {
 
     @Test
     public void test1() {
-        final List<Integer> result = new ArrayList<>();
-        Streams.intRange(0, 1000).boxed().collect(Collectors.toCollection(() -> result));
-        Assert.assertEquals(1000, result.size());
+        List<Integer> result = Streams.intRange(0, 1000).boxed().collect(Collectors.toCollection(ArrayList<Integer>::new));
+        Assert.assertEquals(1000, new ArrayList<Integer>().size());
     }
 
     @Test
