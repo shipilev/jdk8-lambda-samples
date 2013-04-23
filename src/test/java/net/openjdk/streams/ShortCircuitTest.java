@@ -3,7 +3,7 @@ package net.openjdk.streams;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.stream.StreamSupport;
+import java.util.stream.IntStream;
 import java.util.stream.Streams;
 
 public class ShortCircuitTest {
@@ -13,7 +13,7 @@ public class ShortCircuitTest {
     @Test
     public void test01() {
         invocations = 0;
-        int first = Streams.intRange(1, 1000)
+        int first = IntStream.range(1, 1000)
                 .filter(x -> { invocations++; return (x % 42) == 0; })
                 .findFirst().getAsInt();
         Assert.assertEquals(42, first);
@@ -23,7 +23,7 @@ public class ShortCircuitTest {
     @Test
     public void test02() {
         invocations = 0;
-        int first = Streams.intRange(1, 1000)
+        int first = IntStream.range(1, 1000)
                 .parallel()
                 .filter(x -> { invocations++; return (x % 42) == 0; })
                 .findFirst().getAsInt();
@@ -36,7 +36,7 @@ public class ShortCircuitTest {
     @Test
     public void test03() {
         invocations = 0;
-        int first = Streams.intRange(1, 1000)
+        int first = IntStream.range(1, 1000)
                 .unordered()
                 .parallel()
                 .filter(x -> { invocations++; return (x % 42) == 0; })
