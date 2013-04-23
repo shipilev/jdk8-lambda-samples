@@ -62,4 +62,9 @@ public class CaptureBench {
         return cached0;
     }
 
+    /**
+     * Execute with:
+     *  $ java -jar target/microbenchmarks.jar ".*CaptureBench.*" -wi 3 -i 5 -r 1
+     */
+
 }

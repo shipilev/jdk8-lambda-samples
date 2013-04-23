@@ -39,4 +39,9 @@ public class SeqParBench {
         return list.parallelStream().reduce(Math::max).get();
     }
 
+    /**
+     * Execute with:
+     *  $ java -jar target/microbenchmarks.jar ".*SeqParBench.*" -wi 3 -i 5 -r 1
+     */
+
 }
