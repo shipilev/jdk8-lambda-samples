@@ -38,6 +38,7 @@ public class CollectorsTest {
         Assert.assertEquals(Integer.valueOf(0), map.get(111));
     }
 
+    /*
     @Test
     public void test4() {
         Map<Integer,Integer> map =
@@ -52,5 +53,5 @@ public class CollectorsTest {
                         );
         Assert.assertEquals(42, map.size());
     }
-
+    */
 }

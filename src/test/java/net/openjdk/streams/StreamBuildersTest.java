@@ -6,8 +6,6 @@ import org.junit.Test;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
-import java.util.stream.Streams;
 
 public class StreamBuildersTest {
 
@@ -25,7 +23,7 @@ public class StreamBuildersTest {
 
     @Test
     public void test3() {
-        Stream<Integer> s = Streams.concat(
+        Stream<Integer> s = Stream.concat(
                 Stream.<Integer>builder().add(1).build(),
                 Stream.<Integer>builder().add(2).build()
         );
@@ -52,6 +50,7 @@ public class StreamBuildersTest {
         Assert.assertEquals(500500 - 1000, sum);
     }
 
+    /*
     @Test
     public void test7() {
         String sum = Streams.zip(
@@ -73,5 +72,6 @@ public class StreamBuildersTest {
                         .get();
         Assert.assertEquals("Prefix0", sum);
     }
+    */
 
 }
