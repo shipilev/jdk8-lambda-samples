@@ -1,6 +1,5 @@
 package net.openjdk.streams;
 
-import junit.framework.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -10,18 +9,20 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static org.junit.Assert.*;
+
 public class CollectorsTest {
 
     @Test
     public void test1() {
         List<Integer> result = IntStream.range(0, 1000).boxed().collect(Collectors.toCollection(ArrayList<Integer>::new));
-        Assert.assertEquals(1000, result.size());
+        assertEquals(1000, result.size());
     }
 
     @Test
     public void test2() {
         List<Integer> result = IntStream.range(0, 1000).boxed().collect(Collectors.<Integer>toList());
-        Assert.assertEquals(1000, result.size());
+        assertEquals(1000, result.size());
     }
 
     @Test
@@ -34,8 +35,8 @@ public class CollectorsTest {
                                         (x) -> x % 3
                                 )
                         );
-        Assert.assertEquals(1000, map.size());
-        Assert.assertEquals(Integer.valueOf(0), map.get(111));
+        assertEquals(1000, map.size());
+        assertEquals(Integer.valueOf(0), map.get(111));
     }
 
     /*
@@ -51,7 +52,7 @@ public class CollectorsTest {
                                         Collectors.lastWinsMerger()
                                 )
                         );
-        Assert.assertEquals(42, map.size());
+        assertEquals(42, map.size());
     }
     */
 }

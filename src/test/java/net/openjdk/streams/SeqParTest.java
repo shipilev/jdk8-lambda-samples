@@ -1,13 +1,13 @@
 package net.openjdk.streams;
 
-import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
+
+import static org.junit.Assert.*;
 
 public class SeqParTest {
 
@@ -26,7 +26,7 @@ public class SeqParTest {
 
     @Test
     public void testSeq() {
-        Assert.assertEquals(
+        assertEquals(
                 Integer.valueOf(COUNT),
                 list.stream().reduce(Math::max).get()
         );
@@ -34,7 +34,7 @@ public class SeqParTest {
 
     @Test
     public void testPar() {
-        Assert.assertEquals(
+        assertEquals(
                 Integer.valueOf(COUNT),
                 list.parallelStream().reduce(Math::max).get()
         );

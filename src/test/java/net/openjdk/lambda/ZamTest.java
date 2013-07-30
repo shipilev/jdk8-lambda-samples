@@ -1,6 +1,5 @@
 package net.openjdk.lambda;
 
-import junit.framework.Assert;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -15,38 +14,40 @@ import java.util.Comparator;
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
+import static org.junit.Assert.*;
+
 public class ZamTest {
 
     @Test
     public void testUnsignedComparator() {
         Comparator<Integer> cmp = (x, y) -> Integer.compareUnsigned(x, y);
-        Assert.assertEquals(0,  cmp.compare(0, 0));
-        Assert.assertEquals(1,  cmp.compare(-100, 100));
-        Assert.assertEquals(-1, cmp.compare(100, -100));
+        assertEquals(0,  cmp.compare(0, 0));
+        assertEquals(1,  cmp.compare(-100, 100));
+        assertEquals(-1, cmp.compare(100, -100));
     }
 
     @Test
     public void testUnsignedComparatorMRef() {
         Comparator<Integer> cmp = Integer::compareUnsigned;
-        Assert.assertEquals(0,  cmp.compare(0, 0));
-        Assert.assertEquals(1,  cmp.compare(-100, 100));
-        Assert.assertEquals(-1, cmp.compare(100, -100));
+        assertEquals(0,  cmp.compare(0, 0));
+        assertEquals(1,  cmp.compare(-100, 100));
+        assertEquals(-1, cmp.compare(100, -100));
     }
 
     @Test
     public void testUnsignedTreeSet() {
         NavigableSet<Integer> set = new TreeSet<>((x, y) -> Integer.compareUnsigned(x, y));
         set.addAll(Arrays.asList(-100, 0, 100));
-        Assert.assertEquals(0,  set.first().intValue());
-        Assert.assertEquals(-100, set.last().intValue());
+        assertEquals(0,  set.first().intValue());
+        assertEquals(-100, set.last().intValue());
     }
 
     @Test
     public void testUnsignedTreeSetMRef() {
         NavigableSet<Integer> set = new TreeSet<>(Integer::compareUnsigned);
         set.addAll(Arrays.asList(-100, 0, 100));
-        Assert.assertEquals(0,  set.first().intValue());
-        Assert.assertEquals(-100, set.last().intValue());
+        assertEquals(0,  set.first().intValue());
+        assertEquals(-100, set.last().intValue());
     }
 
 
@@ -54,10 +55,10 @@ public class ZamTest {
     public void testUnsignedTreeSetNotSerializable() {
         NavigableSet<Integer> set = new TreeSet<>((x, y) -> Integer.compareUnsigned(x, y));
         set.addAll(Arrays.asList(-100, 0, 100));
-        Assert.assertEquals(0,  set.first().intValue());
-        Assert.assertEquals(-100, set.last().intValue());
+        assertEquals(0,  set.first().intValue());
+        assertEquals(-100, set.last().intValue());
         byte[] serializedSet = writeSetToBytes(set, false);
-        Assert.assertEquals(null, serializedSet );
+        assertEquals(null, serializedSet );
     }
 
 
@@ -65,28 +66,28 @@ public class ZamTest {
     public void testUnsignedTreeSetSerializable() {
         NavigableSet<Integer> set = new TreeSet<>((Comparator<Integer> & Serializable) ((x, y) -> Integer.compareUnsigned(x, y)));
         set.addAll(Arrays.asList(-100, 0, 100));
-        Assert.assertEquals(0,  set.first().intValue());
-        Assert.assertEquals(-100, set.last().intValue());
+        assertEquals(0,  set.first().intValue());
+        assertEquals(-100, set.last().intValue());
         byte[] serializedSet = writeSetToBytes(set, true);
         NavigableSet<Integer> set1 = readSetFromBytes(serializedSet);
-        Assert.assertEquals(0,  set1.first().intValue());
-        Assert.assertEquals(-100, set1.last().intValue());
-        Assert.assertEquals(set,  set1);
+        assertEquals(0,  set1.first().intValue());
+        assertEquals(-100, set1.last().intValue());
+        assertEquals(set,  set1);
     }
 
     @Test
     public void testUnsignedTreeSetSerializableMRef() {
         NavigableSet<Integer> set = new TreeSet<>((Comparator<Integer> & Serializable) (Integer::compareUnsigned));
         set.addAll(Arrays.asList(-100, 0, 100));
-        Assert.assertEquals(0,  set.first().intValue());
-        Assert.assertEquals(-100, set.last().intValue());
+        assertEquals(0,  set.first().intValue());
+        assertEquals(-100, set.last().intValue());
 
         byte[] serializedSet = writeSetToBytes(set, true);
         NavigableSet<Integer> set1 = readSetFromBytes(serializedSet);
 
-        Assert.assertEquals(0,  set1.first().intValue());
-        Assert.assertEquals(-100, set1.last().intValue());
-        Assert.assertEquals(set,  set1);
+        assertEquals(0,  set1.first().intValue());
+        assertEquals(-100, set1.last().intValue());
+        assertEquals(set,  set1);
     }
 
 
@@ -96,7 +97,7 @@ public class ZamTest {
             ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(serializedSet));
             return (NavigableSet<Integer>) ois.readObject();
         } catch (ClassNotFoundException | IOException e) {
-            Assert.fail();
+            fail();
         }
         return null;
     }
@@ -110,11 +111,11 @@ public class ZamTest {
             oos.close();
         } catch (NotSerializableException e) {
             if(shouldFailIfNotSerializable) {
-                Assert.fail();
+                fail();
             }
             return null;
         } catch (IOException e) {
-            Assert.fail();
+            fail();
         }
         return baos.toByteArray();
     }

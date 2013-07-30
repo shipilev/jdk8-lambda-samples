@@ -1,11 +1,12 @@
 package net.openjdk.lambda;
 
-import junit.framework.Assert;
 import org.junit.Test;
 
 import java.util.Comparator;
 import java.util.function.Function;
 import java.util.function.Predicate;
+
+import static org.junit.Assert.*;
 
 public class CaptureTest {
 
@@ -13,7 +14,7 @@ public class CaptureTest {
     public void testLegacy() {
         final int minus_one = -1;
         final int zero = 0;
-        final int one  = 1;
+        final int one = 1;
 
         Comparator<Integer> cmp = new Comparator<Integer>() {
             @Override
@@ -23,24 +24,23 @@ public class CaptureTest {
 
         };
 
-        Assert.assertEquals(0,  cmp.compare(0, 0));
-        Assert.assertEquals(-1, cmp.compare(-100, 100));
-        Assert.assertEquals(1,  cmp.compare(100, -100));
+        assertEquals(0, cmp.compare(0, 0));
+        assertEquals(-1, cmp.compare(-100, 100));
+        assertEquals(1, cmp.compare(100, -100));
     }
 
     @Test
     public void testLambda() {
         int minus_one = -1;
         int zero = 0;
-        int one  = 1;
+        int one = 1;
 
         Comparator<Integer> cmp = (x, y) -> (x < y) ? minus_one : ((x > y) ? one : zero);
 
-        Assert.assertEquals(0,  cmp.compare(0, 0));
-        Assert.assertEquals(-1, cmp.compare(-100, 100));
-        Assert.assertEquals(1,  cmp.compare(100, -100));
+        assertEquals(0, cmp.compare(0, 0));
+        assertEquals(-1, cmp.compare(-100, 100));
+        assertEquals(1, cmp.compare(100, -100));
     }
-
 
     private Predicate<String> makeCaseUnsensitiveMatcher(String pattern) {
         return s -> pattern.equalsIgnoreCase(s);
@@ -49,18 +49,18 @@ public class CaptureTest {
     @Test
     public void testLambda1() {
         // Predicate<T>   ~  boolean test(T t);
-        Assert.assertTrue( makeCaseUnsensitiveMatcher("true").test("TruE") );
-        Assert.assertTrue( makeCaseUnsensitiveMatcher("false").test("FalsE") );
-        Assert.assertFalse(makeCaseUnsensitiveMatcher("true").test("FalsE") );
+        assertTrue(makeCaseUnsensitiveMatcher("true").test("TruE"));
+        assertTrue(makeCaseUnsensitiveMatcher("false").test("FalsE"));
+        assertFalse(makeCaseUnsensitiveMatcher("true").test("FalsE"));
     }
 
     @Test
     public void testLambda2() {
         Function<String, Predicate<String>> matcher = s1 -> s2 -> s1.equalsIgnoreCase(s2);
 
-        Assert.assertTrue(matcher.apply("true").test("TruE"));
-        Assert.assertTrue(matcher.apply("false").test("FalsE"));
-        Assert.assertFalse(matcher.apply("true").test("FalsE"));
+        assertTrue(matcher.apply("true").test("TruE"));
+        assertTrue(matcher.apply("false").test("FalsE"));
+        assertFalse(matcher.apply("true").test("FalsE"));
     }
 
 }

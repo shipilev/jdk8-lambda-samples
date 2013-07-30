@@ -1,20 +1,21 @@
 package net.openjdk.defaults;
 
-import junit.framework.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class DefaultTest {
 
     @Test
     public void testNew() {
-        Assert.assertEquals("Legacy Method from the New Class", new NewClass().legacyMethod());
-        Assert.assertEquals("New Method from the New Class", new NewClass().newMethod());
+        assertEquals("Legacy Method from the New Class", new NewClass().legacyMethod());
+        assertEquals("New Method from the New Class", new NewClass().newMethod());
     }
 
     @Test
     public void testLegacy() {
-        Assert.assertEquals("Legacy Method from the Legacy Class", new LegacyClass().legacyMethod());
-        Assert.assertEquals("The beauty is in the eye of the defender", new LegacyClass().newMethod());
+        assertEquals("Legacy Method from the Legacy Class", new LegacyClass().legacyMethod());
+        assertEquals("The beauty is in the eye of the defender", new LegacyClass().newMethod());
     }
 
     public interface LegacyInterface {

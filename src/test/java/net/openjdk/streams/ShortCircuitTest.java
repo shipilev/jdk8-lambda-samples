@@ -1,9 +1,10 @@
 package net.openjdk.streams;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.stream.IntStream;
+
+import static org.junit.Assert.*;
 
 public class ShortCircuitTest {
 
@@ -15,8 +16,8 @@ public class ShortCircuitTest {
         int first = IntStream.range(1, 1000)
                 .filter(x -> { invocations++; return (x % 42) == 0; })
                 .findFirst().getAsInt();
-        Assert.assertEquals(42, first);
-        Assert.assertEquals(42, invocations);
+        assertEquals(42, first);
+        assertEquals(42, invocations);
     }
 
     @Test
@@ -26,10 +27,10 @@ public class ShortCircuitTest {
                 .parallel()
                 .filter(x -> { invocations++; return (x % 42) == 0; })
                 .findFirst().getAsInt();
-        Assert.assertEquals(42, first);
+        assertEquals(42, first);
 
         // This assert will fail: parallel streams can evaluate more
-//        Assert.assertEquals(42, invocations);
+//        assertEquals(42, invocations);
     }
 
     @Test
@@ -42,10 +43,10 @@ public class ShortCircuitTest {
                 .findFirst().getAsInt();
 
         // This assert can also fail: unordered streams are not having any particular order
-//        Assert.assertEquals(42, first);
+//        assertEquals(42, first);
 
         // This assert will fail: parallel streams can evaluate more
-//        Assert.assertEquals(42, invocations);
+//        assertEquals(42, invocations);
     }
 
 }

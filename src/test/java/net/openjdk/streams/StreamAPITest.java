@@ -1,6 +1,5 @@
 package net.openjdk.streams;
 
-import junit.framework.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -9,13 +8,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static org.junit.Assert.*;
+
 public class StreamAPITest {
 
     @Test
     public void test1() {
         List<String> strings = Arrays.asList("Foo", "Bar", "Baz");
         Stream<String> stream = strings.stream();
-        Assert.assertEquals(
+        assertEquals(
                 "Foo",
                 stream.findFirst().get()
         );
@@ -23,7 +24,7 @@ public class StreamAPITest {
 
     @Test
     public void test2() {
-        Assert.assertEquals(
+        assertEquals(
                 Arrays.asList("Bar", "Baz"),
                 Arrays.asList("Foo", "Bar", "Baz")
                         .stream()
@@ -34,7 +35,7 @@ public class StreamAPITest {
 
     @Test
     public void test3() {
-        Assert.assertEquals(
+        assertEquals(
                 Arrays.asList(3, 3, 3),
                 Arrays.asList("Foo", "Bar", "Baz")
                         .stream()
@@ -45,7 +46,7 @@ public class StreamAPITest {
 
     @Test
     public void test4() {
-        Assert.assertEquals(
+        assertEquals(
                 Integer.valueOf(9),
                 Arrays.asList("Foo", "BarBar", "BazBazBaz")
                         .stream()
@@ -57,7 +58,7 @@ public class StreamAPITest {
 
     @Test
     public void test5() {
-        Assert.assertEquals(
+        assertEquals(
                 Arrays.asList("Foo", "Bar", "Baz"),
                 Arrays.asList("Foo Bar Baz")
                         .stream()
@@ -69,7 +70,7 @@ public class StreamAPITest {
     @SuppressWarnings("serial")
     @Test
     public void test6() {
-        Assert.assertEquals(
+        assertEquals(
                 new ArrayList<String>() {{ add("Foo"); add("Bar"); add("Baz"); }},
                 Arrays.asList("Foo", "Bar", "Baz", "Baz", "Foo", "Bar")
                         .stream()
@@ -80,7 +81,7 @@ public class StreamAPITest {
 
     @Test
     public void test7() {
-        Assert.assertEquals(
+        assertEquals(
                 Arrays.asList("Bar", "Baz", "Foo"),
                 Arrays.asList("Foo", "Bar", "Baz")
                         .stream()

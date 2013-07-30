@@ -1,10 +1,11 @@
 package net.openjdk.streams;
 
-import junit.framework.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class ExternalInternalTest {
 
@@ -17,7 +18,7 @@ public class ExternalInternalTest {
             sb.append(s);
         }
 
-        Assert.assertEquals(
+        assertEquals(
                 "FooBarBaz",
                 sb.toString()
         );
@@ -30,7 +31,7 @@ public class ExternalInternalTest {
         List<String> strings = Arrays.asList("Foo", "Bar", "Baz");
         strings.forEach(sb::append);
 
-        Assert.assertEquals(
+        assertEquals(
                 "FooBarBaz",
                 sb.toString()
         );
