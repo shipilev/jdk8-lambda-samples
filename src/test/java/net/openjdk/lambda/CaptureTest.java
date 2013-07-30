@@ -4,6 +4,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import java.util.Comparator;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class CaptureTest {
@@ -51,7 +52,15 @@ public class CaptureTest {
         Assert.assertTrue( makeCaseUnsensitiveMatcher("true").test("TruE") );
         Assert.assertTrue( makeCaseUnsensitiveMatcher("false").test("FalsE") );
         Assert.assertFalse(makeCaseUnsensitiveMatcher("true").test("FalsE") );
+    }
 
+    @Test
+    public void testLambda2() {
+        Function<String, Predicate<String>> matcher = s1 -> s2 -> s1.equalsIgnoreCase(s2);
+
+        Assert.assertTrue(matcher.apply("true").test("TruE"));
+        Assert.assertTrue(matcher.apply("false").test("FalsE"));
+        Assert.assertFalse(matcher.apply("true").test("FalsE"));
     }
 
 }
