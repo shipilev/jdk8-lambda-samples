@@ -47,7 +47,7 @@ public class CaptureTest {
     }
 
     @Test
-    public void testLambda1() {
+    public void testPredicate1() {
         // Predicate<T>   ~  boolean test(T t);
         assertTrue(makeCaseUnsensitiveMatcher("true").test("TruE"));
         assertTrue(makeCaseUnsensitiveMatcher("false").test("FalsE"));
@@ -55,7 +55,7 @@ public class CaptureTest {
     }
 
     @Test
-    public void testLambda2() {
+    public void testPredicate2() {
         Function<String, Predicate<String>> matcher = s1 -> s2 -> s1.equalsIgnoreCase(s2);
 
         assertTrue(matcher.apply("true").test("TruE"));

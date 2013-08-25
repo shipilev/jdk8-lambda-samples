@@ -60,14 +60,6 @@ public class MethodRefTest {
         assertEquals(1,  cmp.compare(100, -100));
     }
 
-
-    @Test
-    public void testParseInt(){
-        Function<String, Integer> f = Integer::parseInt;
-        assertEquals(Integer.valueOf(0), f.apply("0"));
-        assertEquals(Integer.valueOf(1), f.apply("1"));
-    }
-
     @Test
     public void testConstructor(){
         Function<String, Integer> f = Integer::new;
@@ -87,11 +79,11 @@ public class MethodRefTest {
 
         private int count = 0;
 
-        public int inc() {
+        public int incCount() {
             return ++count;
         }
 
-        public int get() {
+        public int getCount() {
             return count;
         }
     }
@@ -99,15 +91,15 @@ public class MethodRefTest {
     @Test
     public void testConstructor0(){
         Supplier<Counter> f = Counter::new;
-        assertEquals(0, f.get().get());
-        assertEquals(1, f.get().inc());
+        assertEquals(0, f.get().getCount());
+        assertEquals(1, f.get().incCount());
     }
 
     @Test
     public void testConstructor1(){
         Function<Integer, Counter> f = Counter::new;
-        assertEquals(1, f.apply(1).get());
-        assertEquals(42, f.apply(42).get());
+        assertEquals(1, f.apply(1).getCount());
+        assertEquals(42, f.apply(42).getCount());
     }
 
 }

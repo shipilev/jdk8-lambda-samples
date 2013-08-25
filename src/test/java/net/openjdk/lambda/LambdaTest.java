@@ -97,15 +97,9 @@ public class LambdaTest {
     }
 
     @Test
-    public void testBlock0() {
+    public void testConsumer() {
         // Consumer<T>  ~  void accept(T t);
         Consumer<String> b = s -> { System.out.println(s);};
-        Arrays.asList("Foo", "Bar", "Baz", "Baz", "Foo", "Bar").forEach(b);
-    }
-
-    @Test
-    public void testBlock1() {
-        Consumer<String> b = s -> System.out.println(s);
         Arrays.asList("Foo", "Bar", "Baz", "Baz", "Foo", "Bar").forEach(b);
     }
 

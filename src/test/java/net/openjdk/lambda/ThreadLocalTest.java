@@ -10,7 +10,7 @@ public class ThreadLocalTest {
 
     @Test
     public void threadLocalLegacy(){
-        final AtomicInteger counter = new AtomicInteger(0);
+        final AtomicInteger counter = new AtomicInteger(0); //final isn't necessary
         ThreadLocal<Integer> tlNumber = new ThreadLocal<Integer>() {
             @Override
             protected Integer initialValue() {
