@@ -1,7 +1,8 @@
 package net.openjdk.lambda;
 
-import junit.framework.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class UroborosTest {
 
@@ -19,7 +20,7 @@ public class UroborosTest {
             chain = chain.bite();
         }
 
-        Assert.assertEquals(10, depth);
+        assertEquals(10, depth);
     }
 
     @Test
@@ -38,7 +39,7 @@ public class UroborosTest {
             chain = chain.bite();
         }
 
-        Assert.assertEquals(7, depth);
+        assertEquals(7, depth);
     }
 
 }

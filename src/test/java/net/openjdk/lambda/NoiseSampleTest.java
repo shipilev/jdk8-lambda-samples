@@ -1,11 +1,12 @@
 package net.openjdk.lambda;
 
-import junit.framework.Assert;
 import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
+
+import static org.junit.Assert.*;
 
 public class NoiseSampleTest {
 
@@ -85,8 +86,8 @@ public class NoiseSampleTest {
                         }
                 );
 
-        Assert.assertEquals(1, map.get("foo").get("bar").inc());
-        Assert.assertEquals(2, map.get("foo").get("bar").inc());
+        assertEquals(1, map.get("foo").get("bar").inc());
+        assertEquals(2, map.get("foo").get("bar").inc());
     }
 
     @Test
@@ -94,8 +95,8 @@ public class NoiseSampleTest {
         Map<String, Map<String, Counter>> map =
                 new ComputeMap<String, Map<String, Counter>>(() -> new ComputeMap<>(() -> new Counter()));
 
-        Assert.assertEquals(1, map.get("foo").get("bar").inc());
-        Assert.assertEquals(2, map.get("foo").get("bar").inc());
+        assertEquals(1, map.get("foo").get("bar").inc());
+        assertEquals(2, map.get("foo").get("bar").inc());
     }
 
     @Test
@@ -103,8 +104,8 @@ public class NoiseSampleTest {
         Supplier<Map<String, Counter>> mapFactory = () -> new ComputeMap<>(() -> new Counter());
         Map<String, Map<String, Counter>> map = new ComputeMap<>(mapFactory);
 
-        Assert.assertEquals(1, map.get("foo").get("bar").inc());
-        Assert.assertEquals(2, map.get("foo").get("bar").inc());
+        assertEquals(1, map.get("foo").get("bar").inc());
+        assertEquals(2, map.get("foo").get("bar").inc());
     }
 
     @Test
@@ -112,8 +113,8 @@ public class NoiseSampleTest {
         Map<String, Map<String, Counter>> map =
                 new ComputeMap<>((Supplier<Map<String, Counter>>) () -> new ComputeMap<>(() -> new Counter()));
 
-        Assert.assertEquals(1, map.get("foo").get("bar").inc());
-        Assert.assertEquals(2, map.get("foo").get("bar").inc());
+        assertEquals(1, map.get("foo").get("bar").inc());
+        assertEquals(2, map.get("foo").get("bar").inc());
     }
 
     @Test
@@ -121,8 +122,8 @@ public class NoiseSampleTest {
         Map<String, Map<String, Counter>> map =
                 new ComputeMap<String, Map<String, Counter>>(() -> new ComputeMap<>(Counter::new));
 
-        Assert.assertEquals(1, map.get("foo").get("bar").inc());
-        Assert.assertEquals(2, map.get("foo").get("bar").inc());
+        assertEquals(1, map.get("foo").get("bar").inc());
+        assertEquals(2, map.get("foo").get("bar").inc());
     }
 
 }

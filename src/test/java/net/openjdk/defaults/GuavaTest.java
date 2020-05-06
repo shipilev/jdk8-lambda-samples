@@ -1,8 +1,9 @@
 package net.openjdk.defaults;
 
 import com.google.common.collect.TreeMultiset;
-import junit.framework.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class GuavaTest {
 
@@ -14,7 +15,7 @@ public class GuavaTest {
         strings.add("Baz");
 
         String result = strings.stream().reduce((s1, s2) -> s1 + ", " + s2).get();
-        Assert.assertEquals("Bar, Baz, Foo", result);
+        assertEquals("Bar, Baz, Foo", result);
     }
 
 }

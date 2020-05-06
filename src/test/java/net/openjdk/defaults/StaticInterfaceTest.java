@@ -1,15 +1,14 @@
 package net.openjdk.defaults;
 
-import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class StaticInterfaceTest {
 
     @Test
     public void test() {
-        // FIXME: does not run with current public builds
-        Assert.assertEquals("toDublin", TicketOffice.defaultOffice().qDublin());
+        assertEquals("toDublin", TicketOffice.defaultOffice().qDublin());
     }
 
     public interface TicketOffice {
